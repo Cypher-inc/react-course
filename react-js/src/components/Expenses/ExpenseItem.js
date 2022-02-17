@@ -1,17 +1,28 @@
 //componenet is just a js function
 //components are just custom html elements
 //alt shift f to format -- prettier
+import React, {useState} from "react";
+
 import Card from "../UI/Card";
 import ExpenseDate from "./ExpenseDate";
 import "./ExpenseItem.css";
 
 
 function Expenseitem(props){
-let title = props.title
+const [title, setTitle] = useState(props.title);
+//Returns an arr with 2 values
+///Title is the og value and setTitle is the func that updates the value 
+// let title = props.title
+// console.log('Evaluated by React!');
 
 const clickedFunc = () => {
-  console.log('Clicked');
-  title = 'Updated!';
+  console.log(title);
+  // title = 'Updated!';
+  setTitle('Updated!')
+  ///change does not occur instantly, but gets scheduled!
+  if(title === 'Updated!') {
+    setTitle('Not Updated!')
+  }
 }
 
   return (
