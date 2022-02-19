@@ -29,12 +29,11 @@ const clickedFunc = () => {
     <Card className="expense-item">
       <ExpenseDate date = {props.date}></ExpenseDate>
       <div className="expense-item__description">
-        <h2>{title}</h2>
+        <h2>{props.title}</h2>
         <div className="expense-item__price"><p>${props.amount}</p></div>
       </div>
       {/* <button onClick={() => console.log('Button Clicked!')}>Change Title</button> */}
       {/* ////Do not add parenthesis to function! simply attach the name// */}
-      <button onClick={clickedFunc}>Button Clicked</button>  
     </Card>
   );
 }
