@@ -4,10 +4,13 @@
 			"path": "..\\.."
 		},
 		{
-			"path": "..\\..\\..\\..\\..\\..\\LGM-tasks\\form"
+			"path": "..\\..\\..\\react-js"
 		},
 		{
-			"path": "..\\..\\..\\react-js"
+			"path": "..\\..\\..\\..\\code"
+		},
+		{
+			"path": "..\\..\\..\\react-js-styles"
 		}
 	],
 	"settings": {}

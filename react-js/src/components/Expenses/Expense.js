@@ -40,22 +40,6 @@ function Expense(props) {
       )} */}
 
       <ExpenseList item={filteredExpenses}></ExpenseList>
-      {/*    
-    <ExpenseItem
-    title={props.item[i].title}
-    amount={props.item[i].amount}
-    date={props.item[i++].date}
-    ></ExpenseItem>
-    <ExpenseItem
-    title={props.item[i].title}
-    amount={props.item[i].amount}
-    date={props.item[i++].date}
-    ></ExpenseItem>
-    <ExpenseItem
-    title={props.item[i].title}
-    amount={props.item[i].amount}
-    date={props.item[i++].date}
-    ></ExpenseItem> */}
     </Card>
   );
 }
