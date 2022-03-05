@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FormModal from "./FormModal";
 
 const FormComp = (props) => {
   /////////username/////////
@@ -6,29 +7,37 @@ const FormComp = (props) => {
 
   const userNameChange = (event) => {
     setUserTxt(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
 
   /////////////age////////////
   const [userAge, setUserAge] = useState("");
   const userAgeChange = (event) => {
     setUserAge(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
 
+  ////////error///////
+  const [error, setError] = useState();
   const submitHandler = (event) => {
     event.preventDefault();
-    const userData = {
-        Name : userTxt,
-        Age : userAge
+    if (userAge < 0 || userTxt.trim() === "" || userAge.trim() === "") {
+      //   alert("Please enter a valid input!");
+      setError({ Title: "Invalid Input" });
+    } else {
+      const userData = {
+        Name: userTxt,
+        Age: userAge,
+      };
+      props.onSaveData(userData);
+      setUserTxt("");
+      setUserAge("");
     }
-    props.onSaveData(userData)
-    setUserTxt("");
-    setUserAge("");
   };
 
   return (
     <div className="form1  col-md-8 col-8">
+      {error ? <FormModal></FormModal> : ''}
       <form onSubmit={submitHandler}>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
@@ -55,7 +64,6 @@ const FormComp = (props) => {
             onChange={userAgeChange}
           />
         </div>
-
         <button type="submit" class="btn btn-primary">
           Add User
         </button>

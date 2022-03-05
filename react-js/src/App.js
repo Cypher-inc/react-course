@@ -8,13 +8,16 @@ function App() {
 
   
   const [userData, setUserData] = useState('')
+
   const InputSaveData = (userData) => {
       console.log(userData);
-      const newDataArr = [userData]
+      const newDataArr= [userData]
       console.log(newDataArr);
     //  setUserData(newDataArr)
 
-     setUserData(newDataArr)
+    setUserData((prevData) => {
+      return [userData, ...prevData];
+    });
   }
 
   return (
