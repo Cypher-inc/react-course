@@ -1,11 +1,19 @@
 const FormInput = (props) => {
-  return (
-    <div className="card1 mt-4">
-      <div class="card">
-        <div class="card-body">
-          {props.userDataProp} {props.userDataProp}
-        </div>
+  let emptyVar = "No Data found";
+
+  if (props.userDataProp.length > 0) {
+    emptyVar = props.userDataProp.map((newData) => (
+      <div>
+        {newData.Name} {newData.Age}
       </div>
+));
+  }
+
+  return (
+    <div className="card1 mt-4 col-md-8">
+      <div class="card"><div class="card-body text-center">
+        {emptyVar}
+      </div></div>
     </div>
   );
 };

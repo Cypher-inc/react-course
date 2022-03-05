@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react/cjs/react.production.min";
+import { useState } from 'react';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import FormComp from "./comp/FormComp";
 import FormInput from "./comp/FormInput";
@@ -7,10 +7,14 @@ import FormInput from "./comp/FormInput";
 function App() {
 
   
-  const [userData, setUserData] = useState(userData)
+  const [userData, setUserData] = useState('')
   const InputSaveData = (userData) => {
       console.log(userData);
-     setUserData(userData)
+      const newDataArr = [userData]
+      console.log(newDataArr);
+    //  setUserData(newDataArr)
+
+     setUserData(newDataArr)
   }
 
   return (

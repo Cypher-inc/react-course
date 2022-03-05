@@ -28,7 +28,7 @@ const FormComp = (props) => {
   };
 
   return (
-    <div className="form1  col-md-6 col-8">
+    <div className="form1  col-md-8 col-8">
       <form onSubmit={submitHandler}>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
