@@ -1,23 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
-
 * {
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 html {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: sans-serif;
 }
 
 body {
   margin: 0;
-  background: linear-gradient(to right, #3A6073, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 }
-
-.expenseItem1{
-}
-/* h2{
-  text-align: center;
-  color: aliceblue;
-} */
