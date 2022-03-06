@@ -24,6 +24,7 @@ const FormComp = (props) => {
     if (userAge < 0 || userTxt.trim() === "" || userAge.trim() === "") {
       //   alert("Please enter a valid input!");
       setError({ Title: "Invalid Input" });
+ 
     } else {
       const userData = {
         Name: userTxt,
@@ -35,9 +36,14 @@ const FormComp = (props) => {
     }
   };
 
+  const errHandler = () =>{
+   setError(null)
+  }
   return (
     <div className="form1  col-md-8 col-8">
-      {error ? <FormModal></FormModal> : ''}
+      {/* {error ? <FormModal onConfirm={errHandler}></FormModal> : ''} */}
+      {error && <FormModal onConfirm={errHandler} formTitle={error.Title}></FormModal>}
+
       <form onSubmit={submitHandler}>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">
