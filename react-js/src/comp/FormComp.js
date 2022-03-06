@@ -21,11 +21,17 @@ const FormComp = (props) => {
   const [error, setError] = useState();
   const submitHandler = (event) => {
     event.preventDefault();
-    if (userAge < 0 || userTxt.trim() === "" || userAge.trim() === "") {
+    if (userTxt.trim() === "" || userAge.trim() === "") {
       //   alert("Please enter a valid input!");
-      setError({ Title: "Invalid Input" });
+      setError({Title: "Invalid Input!", 
+      Body: 'Please enter a valid input!'});
  
-    } else {
+    } 
+    else if(userAge < 0){
+      setError({ Title: "Invalid Input!", 
+    Body: 'Age cannot be less than 0!'});
+    }
+    else{
       const userData = {
         Name: userTxt,
         Age: userAge,
@@ -40,9 +46,9 @@ const FormComp = (props) => {
    setError(null)
   }
   return (
-    <div className="form1  col-md-8 col-8">
+    <div className="form1 col-md-8 col-8 pt-3 pb-3 ">
       {/* {error ? <FormModal onConfirm={errHandler}></FormModal> : ''} */}
-      {error && <FormModal onConfirm={errHandler} formTitle={error.Title}></FormModal>}
+      {error && <FormModal onConfirm={errHandler} formTitle={error}></FormModal>}
 
       <form onSubmit={submitHandler}>
         <div class="mb-3">

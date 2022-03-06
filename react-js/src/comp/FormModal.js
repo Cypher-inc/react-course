@@ -17,9 +17,9 @@ const FormModal = (props) => {
 
       <Modal show={show}>
         <Modal.Header closeButton onClick={props.onConfirm}>
-          <Modal.Title>{props.formTitle}</Modal.Title>
+          <Modal.Title>{props.formTitle.Title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>{props.formTitle.Body}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={props.onConfirm}>
             Close

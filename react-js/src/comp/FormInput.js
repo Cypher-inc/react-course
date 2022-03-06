@@ -12,7 +12,7 @@ const FormInput = (props) => {
   }
 
   return (
-    <div className="card1 mt-4 col-md-8">
+    <div className="card1 mt-4 mb-4 col-md-8">
       <div class="card">
         <div class="card-body text-center">{emptyVar}</div>
       </div>
