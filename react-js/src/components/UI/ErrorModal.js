@@ -23,7 +23,7 @@ const ErrorModal = (props) => {
       </footer>
     </Card>)
   };
-
+//Ref stands for reference
   return (
     <React.Fragment>
       {ReactDOM.createPortal(

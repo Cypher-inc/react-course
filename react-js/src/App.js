@@ -1,33 +1,26 @@
-import React from "react";
-import { useState } from 'react';
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import FormComp from "./comp/FormComp";
-import FormInput from "./comp/FormInput";
+import React, { useState } from 'react';
+
+import AddUser from './components/Users/AddUser';
+import UsersList from './components/Users/UsersList';
 
 function App() {
+  const [usersList, setUsersList] = useState([]);
 
-  
-  const [userData, setUserData] = useState('')
-
-  const InputSaveData = (userData) => {
-      console.log(userData);
-      const newDataArr= [userData]
-      console.log(newDataArr);
-    //  setUserData(newDataArr)
-
-    setUserData((prevData) => {
-      return [userData, ...prevData];
+  const addUserHandler = (uName, uAge) => {
+    setUsersList((prevUsersList) => {
+      return [
+        ...prevUsersList,
+        { name: uName, age: uAge, id: Math.random().toString() },
+      ];
     });
-  }
+  };
 
   return (
-    <div className="container col-md-10">
-      <div className="row row-content justify-content-center align-items-center mt-5">
-        <FormComp onSaveData={InputSaveData}></FormComp>
-        <FormInput userDataProp={userData}></FormInput>
-
-      </div>
-    </div>
+    //React.fragment (make sure to import React)
+    <> 
+      <AddUser onAddUser={addUserHandler} />
+      <UsersList users={usersList} />
+    </>
   );
 }
 
