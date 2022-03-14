@@ -4,6 +4,9 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import MainHeader from './components/MainHeader/MainHeader';
 
+//app rerusn every time a state changes
+//side effects should not be put in app
+//we use use effect hook
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
