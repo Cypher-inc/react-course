@@ -11,14 +11,31 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  //Woutout [] runs everytime, With [] only once, with []
+  // [] and arguments(dependency) only when arguments changes
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes("@") && enteredPassword.trim().length > 6
-    );
-  }, [setFormIsValid,enteredEmail,enteredPassword]); 
+    console.log("Effect runnning");
+    return () => {
+      console.log("Effect Cleanup!"); //Triggers before useEffect
+    };
+  }, [enteredPassword]);
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("Checking form validity");
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 6
+      );
+    }, 500); //setting timeout and anonymous arrow function
+
+    return () => {
+      console.log("Clean up!");
+      clearTimeout(identifier); //clearing the last timer
+    };
+  }, [enteredEmail, enteredPassword]);
   //checkes if any of these have changed and only then executes the function
   //state update function , ie setFormIsValid may NOT be added
-  
+
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
 
