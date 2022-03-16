@@ -20,36 +20,36 @@ const Login = (props) => {
     };
   }, [enteredPassword]);
 
-  useEffect(() => {
-    const identifier = setTimeout(() => {
-      console.log("Checking form validity");
-      setFormIsValid(
-        enteredEmail.includes("@") && enteredPassword.trim().length > 6
-      );
-    }, 500); //setting timeout and anonymous arrow function
+  // useEffect(() => {
+  //   const identifier = setTimeout(() => {
+  //     console.log("Checking form validity");
+  //     setFormIsValid(
+  //       enteredEmail.includes("@") && enteredPassword.trim().length > 6
+  //     );
+  //   }, 500); //setting timeout and anonymous arrow function
 
-    return () => {
-      console.log("Clean up!");
-      clearTimeout(identifier); //clearing the last timer
-    };
-  }, [enteredEmail, enteredPassword]);
+  //   return () => {
+  //     console.log("Clean up!");
+  //     clearTimeout(identifier); //clearing the last timer
+  //   };
+  // }, [enteredEmail, enteredPassword]);
   //checkes if any of these have changed and only then executes the function
   //state update function , ie setFormIsValid may NOT be added
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
 
-    // setFormIsValid(
-    //   event.target.value.includes("@") && enteredPassword.trim().length > 6
-    // );
+    setFormIsValid(
+      event.target.value.includes("@") && enteredPassword.trim().length > 6
+    );
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
 
-    // setFormIsValid(
-    //   event.target.value.trim().length > 6 && enteredEmail.includes("@")
-    // );
+    setFormIsValid(
+      event.target.value.trim().length > 6 && enteredEmail.includes("@")
+    );
   };
 
   const validateEmailHandler = () => {
