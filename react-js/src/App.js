@@ -1,52 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-import Login from "./components/Login/Login";
-import Home from "./components/Home/Home";
-import MainHeader from "./components/MainHeader/MainHeader";
-import AuthContext from "./store/auth-context";
-
-//app rerusn every time a state changes
-//side effects should not be put in app
-//we use use effect hook
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {  const storedUserLoginInfo = localStorage.getItem("isLoggedIn");
-
-  if (storedUserLoginInfo === "1") {
-    setIsLoggedIn(true);
-    //Every time the set function is triggered the app component is triggered!
-    //CAUSES AN INFINTE LOOP, so we use useEffect
-  }}, []); //sets the dependencies
-
-  const loginHandler = (email, password) => {
-    // We should of course check email and password
-    // But it's just a dummy/ demo anyways
-    // localStorage.setItem("isLoggedIn", "1");
-    localStorage.setItem("isLoggedIn", "1");
-    setIsLoggedIn(true);
-  };
-
-  const logoutHandler = () => {
-    setIsLoggedIn(false);
-  };
-
+const App = () => {
   return (
-    // <React.Fragment>
-       <AuthContext.Provider value={{
-         isLoggedIn:isLoggedIn,
-         onLogout: logoutHandler
-       }}>
-      <MainHeader  onLogout={logoutHandler} />
-      <main>
-        {!isLoggedIn && <Login onLogin={loginHandler} />}
-        {isLoggedIn && <Home onLogout={logoutHandler} />}
-      </main>
-      </AuthContext.Provider> 
-
+    <div className="container d-flex h-100">
+      <div className="row justify-content-center align-self-center">
+        <h1>Hello</h1>
+        <div className="container content ">
+          <div className="row">
+            <div className="bg-dark">
+              <h2>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was
+                popularised in the 1960s with the release of Letraset sheets
+                containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of
+                Lorem Ipsum.
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    // <div className="container d-flex h-100">
+    //   <div className="row justify-content-center align-self-center">
+    //     <h1 className="d-flex h-100 align-items-center">Hello World</h1>
+    //   </div>
+    // </div>
   );
-}
-      {/* Auth can also be used as a wrapper */}
-    {/* </React.Fragment> */}
+};
 
 export default App;
