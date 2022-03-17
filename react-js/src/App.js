@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import MainHeader from "./components/MainHeader/MainHeader";
+import AuthContext from "./store/auth-context";
 
 //app rerusn every time a state changes
 //side effects should not be put in app
@@ -31,14 +32,21 @@ function App() {
   };
 
   return (
-    <React.Fragment>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+    // <React.Fragment>
+       <AuthContext.Provider value={{
+         isLoggedIn:isLoggedIn,
+         onLogout: logoutHandler
+       }}>
+      <MainHeader  onLogout={logoutHandler} />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
       </main>
-    </React.Fragment>
+      </AuthContext.Provider> 
+
   );
 }
+      {/* Auth can also be used as a wrapper */}
+    {/* </React.Fragment> */}
 
 export default App;

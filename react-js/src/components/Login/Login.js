@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
+import InputComp from "../UI/Input";
 
 const Login = (props) => {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -68,21 +69,27 @@ const Login = (props) => {
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
-        <div
-          className={`${classes.control} ${
-            emailIsValid === false ? classes.invalid : ""
-          }`}
-        >
-          <label htmlFor="email">E-Mail</label>
-          <input
-            type="email"
-            id="email"
-            value={enteredEmail}
-            onChange={emailChangeHandler}
-            onBlur={validateEmailHandler}
-          />
-        </div>
-        <div
+        <InputComp
+          id="Email"
+          label="Email"
+          type="Email"
+          emailIsValidProp={emailIsValid}
+          enteredValue={enteredEmail}
+          onChange={emailChangeHandler}
+          onBlur={validateEmailHandler}
+        ></InputComp>
+
+        <InputComp
+          id="Password"
+          label="Password"
+          type="Password"
+          passwordIsValid={passwordIsValid}
+          enteredValue={enteredPassword}
+          onChange={passwordChangeHandler}
+          onBlur={validatePasswordHandler}
+        ></InputComp>
+
+        {/* <div
           className={`${classes.control} ${
             passwordIsValid === false ? classes.invalid : ""
           }`}
@@ -95,7 +102,7 @@ const Login = (props) => {
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
           />
-        </div>
+        </div> */}
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
             Login
