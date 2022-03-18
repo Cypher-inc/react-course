@@ -1,0 +1,21 @@
+
+.content{
+  /* padding-left: 15% !important; */
+  /* padding-right: 15% !important; */
+  justify-content: center !important;
+}
+
+.orderList{
+  border-radius: 10px;
+  color: black;
+  width: 120vh;
+  /* margin-left: 50%; */
+}
+
+.flex2{
+flex-direction: row-reverse !important;
+}
+
+p{
+  margin-bottom: 0px !important;
+}
