@@ -1,22 +1,29 @@
 import "./ModalBody.css";
-import { React, useState } from "react";
+import { React, useRef, useState } from "react";
 
 const ModalBody = (props) => {
-  const [quantityVal, setQuantityVal] = useState(props.dishQuantity);
-  
-//   let quantityVal2;
-//   const decFunc = () => {
-//     let quantityVal1 = document.querySelector(".ModalQuantity").textContent;
-//     // console.log(quantityVal1[1]);
-//     quantityVal2 = Number(quantityVal1[1]);
-//     quantityVal2 += quantityVal2+
-//     console.log(quantityVal2);
-    
-//   };
+  const [quantityVal, setQuantityVal] = useState(1);
+  const quantityInput = useRef(null);
 
-    const testQuantVal = (event) => {
-        console.log(event.target.value);
+  let dummyVal;
+  dummyVal = quantityVal;
+  const incFunc = () => {
+    if (quantityVal > 0) {
+      // console.log(Number(quantityInput.current.textContent[1]));
+      dummyVal++;
+      // console.log(dummyVal);
+      setQuantityVal(dummyVal);
     }
+  };
+
+  const decFunc = () => {
+    if (quantityVal > 1) {
+      // console.log(Number(quantityInput.current.textContent[1]));
+      dummyVal--;
+      // console.log(dummyVal);
+      setQuantityVal(dummyVal);
+    }
+  };
 
   //Calc total function
   let total = 0;
@@ -39,22 +46,25 @@ const ModalBody = (props) => {
         <h5>{props.dishName}</h5>
         <div className="d-flex modal-info align-items-center">
           <span className="ModalTotal">${props.dishCost}</span>
-          <span className="ModalQuantity" value={quantityVal}
-          onLoad={testQuantVal}>
-            x{props.dishQuantity}
+          <span
+            className="ModalQuantity"
+            ref={quantityInput}
+            // value={quantityVal}
+          >
+            x{quantityVal}
           </span>
           <div>
             <button
               type="button"
               className="btn btn-outline-dark dark-btn1"
-            //   onClick={decFunc}
+              onClick={decFunc}
             >
               ➖
             </button>
             <button
               type="button"
               className="btn btn-outline-dark"
-              onClick={sendTotal}
+              onClick={incFunc}
             >
               ➕
             </button>
