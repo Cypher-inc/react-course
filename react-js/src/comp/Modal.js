@@ -3,10 +3,16 @@ import { Modal, Button } from "react-bootstrap";
 import ModalBody from "./ModalBody";
 
 const ModalComp = (props) => {
-  let totalDataVal
-  const modalToalValRec = (totalData) => {
-    console.log(totalData);
-    totalDataVal = totalData
+  // let totalDataVal;
+  // const modalToalValRec = (totalData) => {
+  //   console.log(totalData);
+  //   totalDataVal = totalData;
+  // };
+
+  const [totalAmount,setTotalAmount] = useState(0)
+  const calcTotalCost = (totalVal) => {
+    console.log(totalVal);
+    setTotalAmount(totalVal)
   };
 
   return (
@@ -21,27 +27,27 @@ const ModalComp = (props) => {
         </Modal.Header>
         <Modal.Body>
           <ModalBody
+            totalFunc={calcTotalCost}
             dishName={"Sushi"}
             dishCost={22.99}
             dishQuantity={1}
-            modalToalVal={modalToalValRec}
           ></ModalBody>
           <ModalBody
+            totalFunc={calcTotalCost}
             dishName={"Schnitzel"}
             dishCost={16.51}
             dishQuantity={3}
-            modalToalVal={modalToalValRec}
           ></ModalBody>
           <ModalBody
+            totalFunc={calcTotalCost}
             dishName={"Barbeque Borgir"}
             dishCost={12.99}
             dishQuantity={2}
-            modalToalVal={modalToalValRec}
           ></ModalBody>
 
           <div className="d-flex mt-3 modal-total">
             <h5>Total Amount</h5>
-            <span className="modal-total-cost">${totalDataVal}</span>
+            <span className="modal-total-cost">${totalAmount}</span>
           </div>
         </Modal.Body>
 

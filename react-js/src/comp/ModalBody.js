@@ -2,7 +2,7 @@ import "./ModalBody.css";
 import { React, useRef, useState } from "react";
 
 const ModalBody = (props) => {
-  const [quantityVal, setQuantityVal] = useState(1);
+  const [quantityVal, setQuantityVal] = useState(props.dishQuantity);
   const quantityInput = useRef(null);
 
   let dummyVal;
@@ -13,6 +13,7 @@ const ModalBody = (props) => {
       dummyVal++;
       // console.log(dummyVal);
       setQuantityVal(dummyVal);
+      modalBodyChange(dummyVal);
     }
   };
 
@@ -22,23 +23,32 @@ const ModalBody = (props) => {
       dummyVal--;
       // console.log(dummyVal);
       setQuantityVal(dummyVal);
+      modalBodyChange(dummyVal);
     }
   };
 
   //Calc total function
-  let total = 0;
-  // let total1
-  const calcTotal = (x, y) => {
-    total += x * y;
-    // total1 = total
-    // console.log(total);
-  };
-  calcTotal(props.dishCost, props.dishQuantity);
+  // let total = 0;
+  // // let total1
+  // const calcTotal = (x, y) => {
+  //   total += x * y;
+  //   // total1 = total
+  //   // console.log(total);
+  // };
+  // calcTotal(props.dishCost, props.dishQuantity);
 
-  function sendTotal() {
-    props.modalToalVal(total);
-  }
+  // function sendTotal() {
+  //   props.modalToalVal(total);
+  // }
   //   console.log(sendTotal);
+
+  let totalCost;
+  const modalBodyChange = (dummyVal) => {
+    // console.log("Changed!");
+    console.log(dummyVal * props.dishCost);
+    totalCost = dummyVal * props.dishCost;
+    props.totalFunc(totalCost);
+  };
 
   return (
     <>
