@@ -13,8 +13,7 @@ const ModalBody = (props) => {
       dummyVal++;
       // console.log(dummyVal);
       setQuantityVal(dummyVal);
-      props.newVal(props.dishCost);
-      // modalBodyChange(dummyVal);
+      modalBodyChange(dummyVal);
     }
   };
 
@@ -24,9 +23,17 @@ const ModalBody = (props) => {
       dummyVal--;
       // console.log(dummyVal);
       setQuantityVal(dummyVal);
-      props.newVal(-props.dishCost);
-      // modalBodyChange(dummyVal);
+      modalBodyChange(dummyVal);
     }
+  };
+
+
+  let totalCost;
+  const modalBodyChange = (dummyVal) => {
+    // console.log("Changed!");
+    console.log(dummyVal * props.dishCost);
+    totalCost = dummyVal * props.dishCost;
+    props.totalFunc(totalCost);
   };
 
   return (
