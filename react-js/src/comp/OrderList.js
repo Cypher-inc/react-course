@@ -1,9 +1,19 @@
 import React from "react";
 import "./OrderList.css";
 import "react-bootstrap";
-import { Container, Row, Button} from "react-bootstrap";
+import { Container, Row, Button } from "react-bootstrap";
 
-const OrderList = () => {
+const OrderList = (props) => {
+  const dataPassFunc = () => {
+    const data = `<ModalBody
+      newVal={appendNewVal}
+      dishName={"Barbeque Borgir"}
+      dishCost={12.99}
+      dishQuantity={2}
+    ></ModalBody>`;
+    props.dataPassFunc1(data);
+  };
+
   return (
     <Container className="content">
       <Row className="justify-content-center">
@@ -19,7 +29,11 @@ const OrderList = () => {
               <input type="number" className="QuantityInput" />
 
               <Row className="btn-row">
-                <Button variant="warning" className="mt-2">
+                <Button
+                  variant="warning"
+                  className="mt-2"
+                  onClick={dataPassFunc}
+                >
                   +Add
                 </Button>{" "}
               </Row>

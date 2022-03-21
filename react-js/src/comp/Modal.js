@@ -21,6 +21,12 @@ const ModalComp = (props) => {
     setTotalAmount(Math.round(totalVal2 * 100) / 100);
   };
 
+  
+  console.log(props.modalValProp);
+  // function createMarkup() {
+  //   return {__html: props.modalValProp};
+  // }
+
   return (
     <>
       <Modal show={props.value} onHide={props.closeProp}>
@@ -28,6 +34,8 @@ const ModalComp = (props) => {
           <Modal.Title>Your Orders</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {/* {props.modalValProp} */}
+          <div dangerouslySetInnerHTML={{ __html: props.modalValProp }}></div>
           <ModalBody
             // totalFunc={calcTotalCost}
             newVal={appendNewVal}
@@ -42,13 +50,13 @@ const ModalComp = (props) => {
             dishCost={16.51}
             dishQuantity={3}
           ></ModalBody>
-          <ModalBody
+          {/* <ModalBody
             newVal={appendNewVal}
             // totalFunc={calcTotalCost}
             dishName={"Barbeque Borgir"}
             dishCost={12.99}
             dishQuantity={2}
-          ></ModalBody>
+          ></ModalBody> */}
 
           <div className="d-flex mt-3 modal-total">
             <h5>Total Amount</h5>

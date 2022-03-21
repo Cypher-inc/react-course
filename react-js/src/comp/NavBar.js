@@ -3,11 +3,17 @@ import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import ModalComp from "./Modal";
 import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = (props) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // console.log(props.passVal);
+  
+  // function createMarkup() {
+  //   return {__html: props.passVal};
+  // }
 
   return (
     <>
@@ -15,6 +21,7 @@ const NavBar = () => {
         value={show}
         closeProp={handleClose}
         showProp={handleShow}
+        modalValProp={props.passVal}
       ></ModalComp>
       <Navbar bg="dark" variant="dark">
         <Container className="navbar-main justify-content-between">

@@ -45,6 +45,7 @@ const FormComp = (props) => {
   const errHandler = () =>{
    setError(null)
   }
+
   return (
     <div className="form1 col-md-8 col-8 pt-3 pb-3 ">
       {/* {error ? <FormModal onConfirm={errHandler}></FormModal> : ''} */}
