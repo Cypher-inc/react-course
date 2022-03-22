@@ -34,8 +34,8 @@ const ModalComp = (props) => {
           <Modal.Title>Your Orders</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* {props.modalValProp} */}
-          <div dangerouslySetInnerHTML={{ __html: props.modalValProp }}></div>
+          {props.modalValProp}
+          {/* <div dangerouslySetInnerHTML={{ __html: props.modalValProp }}></div> */}
           <ModalBody
             // totalFunc={calcTotalCost}
             newVal={appendNewVal}

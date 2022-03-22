@@ -4,6 +4,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./comp/NavBar";
 import OrderList from "./comp/OrderList";
 import "./index.css";
+import CartProvider from "./store/CartProvider";
 
 const App = () => {
 
@@ -18,7 +19,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <CartProvider>
       <NavBar passVal={userData}></NavBar>
 
       <div className="container d-flex h-100 main">
@@ -28,7 +29,7 @@ const App = () => {
           <OrderList dataPassFunc1={checkPassFunc}></OrderList>
         </div>
       </div>
-    </>
+    </CartProvider>
   );
 };
 
