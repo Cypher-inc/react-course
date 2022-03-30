@@ -5,11 +5,16 @@ import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 
 const Login = (props) => {
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [emailIsValid, setEmailIsValid] = useState();
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [passwordIsValid, setPasswordIsValid] = useState();
+  const [enteredEmail, setEnteredEmail] = useState("");  //realted state 1
+  const [emailIsValid, setEmailIsValid] = useState();   //related state 1
+  const [enteredPassword, setEnteredPassword] = useState("");   //related state 2
+  const [passwordIsValid, setPasswordIsValid] = useState();  //related state 2
   const [formIsValid, setFormIsValid] = useState(false);
+
+  useEffect(()=>{
+    console.log('EFFECT RUNNING!');
+    
+  },[enteredEmail])
 
   useEffect(() => {
     const identifier = setTimeout(() => {
@@ -27,12 +32,21 @@ const Login = (props) => {
     };
   }, [enteredEmail, enteredPassword]);
 
+  //when multiple states are similar we use useReducer
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
+
+    setFormIsValid(
+      event.target.event.includes("@") && enteredPassword.trim().length > 6
+    );
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
+
+    setFormIsValid(
+      event.target.event.includes("@") && enteredPassword.trim().length > 6
+    );
   };
 
   const validateEmailHandler = () => {
