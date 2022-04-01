@@ -56,25 +56,26 @@ const Login = (props) => {
     isValid: null,
   });
 
-  // useEffect(() => {
-  //   console.log("EFFECT RUNNING!");
-  // }, [enteredEmail]);
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
 
-  // useEffect(() => {
-  //   const identifier = setTimeout(() => {
-  //     console.log("checking form validity");
+  useEffect(() => {
+    console.log("EFFECT RUNNING!");
+  }, [emailState]);
 
-  //     setFormIsValid(
-  //       enteredEmail.includes("@") && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("checking form validity");
 
-  //   //Retuning a function
-  //   return () => {
-  //     console.log("Clean_Up");
-  //     clearTimeout(identifier)
-  //   };
-  // }, [enteredEmail, enteredPassword]);
+      setFormIsValid(emailState.isValid && passwordState.isValid);
+    }, 500);
+
+    //Retuning a function
+    return () => {
+      console.log("Clean_Up");
+      clearTimeout(identifier);
+    };
+  }, [emailIsValid, passwordIsValid]);
 
   //when multiple states are similar we use useReducer
   const emailChangeHandler = (event) => {
