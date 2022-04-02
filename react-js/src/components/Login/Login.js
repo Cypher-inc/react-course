@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useRef } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
@@ -47,11 +47,13 @@ const Login = (props) => {
   // const [passwordIsValid, setPasswordIsValid] = useState(); //related state 2
   const [formIsValid, setFormIsValid] = useState(false);
 
+  const emailRef = useRef()
   const [emailState, dispachEmail] = useReducer(emailReducer, {
     value: "",
     isValid: null,
   });
 
+  const passwordRef = useRef()
   const [passwordState, dispachPassword] = useReducer(passwordReducer, {
     value: "",
     isValid: null,
@@ -105,7 +107,15 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    if(formIsValid){
+      props.onLogin(emailState.value, passwordState.value);
+    }
+    else if(!emailIsValid){
+        emailRef.current.activate()
+    }
+    else{
+        passwordRef.current.activate()
+    }
   };
 
   return (
@@ -113,16 +123,27 @@ const Login = (props) => {
       <form onSubmit={submitHandler}>
         <InputComp
           pClass={classes}
-          pEmail={emailState}
-          pEmailChange={emailChangeHandler}
-          pEmailValid={validateEmailHandler}
-          pPass={passwordState}
-          pPassChange={passwordChangeHandler}
-          pPassValid={validatePasswordHandler}
+          pValue={emailState}
+          pChange={emailChangeHandler}
+          pIsValid={emailIsValid}
+          pOnBlur={validateEmailHandler}
+          pid='email'
+          pName='E-mail'
+          ref={emailRef}
+        ></InputComp>
+        <InputComp
+          pClass={classes}
+          pValue={passwordState}
+          pChange={passwordChangeHandler}
+          pIsValid={passwordIsValid}
+          pOnBlur={validatePasswordHandler}
+          pid='password'
+          pName='Password'
+          ref={passwordRef}
         ></InputComp>
 
         <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+          <Button type="submit" className={classes.btn}> 
             Login
           </Button>
         </div>
