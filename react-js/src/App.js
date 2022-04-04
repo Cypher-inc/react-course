@@ -20,11 +20,18 @@ function App() {
   // ];
 
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const fetchMovies = () => {
-    fetch("https://swapi.dev/api/films/")
-      .then((resposne) => {
-        return resposne.json();
+    setIsLoading(true);
+
+    fetch("https://swapi.dev/api/films/") //return a promise
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Something went wrong..");
+        }
+        return response.json();
       })
       .then((data) => {
         const transformData = data.results.map((movieData) => {
@@ -37,7 +44,11 @@ function App() {
           };
         });
         setMovies(transformData);
+      })
+      .catch((error) => {
+        setError(error.message);
       });
+    setIsLoading(false);
   };
 
   return (
@@ -46,7 +57,20 @@ function App() {
         <button onClick={fetchMovies}>Fetch Movies</button>
       </section>
       <section>
-        <MoviesList movies={movies} />
+        {!isLoading && movies.length > 0 ? (
+          <MoviesList movies={movies} />
+        ) : !isLoading && movies.length === 0 && !error ? (
+          <h1>No movies found</h1>
+        ) : !isLoading && error ? (
+          <h1>{error}</h1>
+        ) : isLoading ? (
+          <h2>⏳</h2>
+        ) : (
+          ""
+        )}
+        {/* {!isLoading && movies.length === 0 && !error ? <h1>No movies found</h1> : !isLoading && error ? <h1>{error}</h1> : isLoading ? <h2>⏳</h2> : ''} */}
+        {/* {isLoading && <h2>⏳</h2>} */}
+        {/* {!isLoading && error && <h1>{error}</h1>} */}
       </section>
     </React.Fragment>
   );
