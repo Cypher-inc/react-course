@@ -13,7 +13,10 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("https://swapi.dev/api/films/");
+      // const response = await fetch("https://swapi.dev/api/films/");
+      const response = await fetch(
+        "https://react-http1-59f2d-default-rtdb.firebaseio.com/movies.json"
+      );
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
@@ -39,23 +42,13 @@ function App() {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
 
+  //fetch is also use to POST DATA
   function addMovieHandler(movie) {
-    console.log(movie);
+    // console.log(movie);
+    fetch("https://react-http1-59f2d-default-rtdb.firebaseio.com/movies.json", {
+      method: "POST",
+    });
   }
-
-  // let content = <p>Found no movies.</p>;
-
-  // if (movies.length > 0) {
-  //   content = <MoviesList movies={movies} />;
-  // }
-
-  // if (error) {
-  //   content = <p>{error}</p>;
-  // }
-
-  // if (isLoading) {
-  //   content = <p>Loading...</p>;
-  // }
 
   const content =
     movies.length > 0 ? (
