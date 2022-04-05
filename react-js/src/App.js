@@ -43,19 +43,30 @@ function App() {
     console.log(movie);
   }
 
-  let content = <p>Found no movies.</p>;
+  // let content = <p>Found no movies.</p>;
 
-  if (movies.length > 0) {
-    content = <MoviesList movies={movies} />;
-  }
+  // if (movies.length > 0) {
+  //   content = <MoviesList movies={movies} />;
+  // }
 
-  if (error) {
-    content = <p>{error}</p>;
-  }
+  // if (error) {
+  //   content = <p>{error}</p>;
+  // }
 
-  if (isLoading) {
-    content = <p>Loading...</p>;
-  }
+  // if (isLoading) {
+  //   content = <p>Loading...</p>;
+  // }
+
+  const content =
+    movies.length > 0 ? (
+      <MoviesList movies={movies} />
+    ) : error ? (
+      <p>{error}</p>
+    ) : isLoading ? (
+      <h1>⏳</h1>
+    ) : (
+      <h1>No movies found.</h1>
+    );
 
   return (
     <React.Fragment>
