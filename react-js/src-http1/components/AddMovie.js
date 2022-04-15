@@ -2,15 +2,24 @@ import React, { useRef } from "react";
 
 import classes from "./AddMovie.module.css";
 
-function AddMovie(props) {
-  const titleRef = useRef("");
-  const openingTextRef = useRef("");
-  const releaseDateRef = useRef("");
+const AddMovie = (props) => {
+  // function AddMovie(props) {
+  let titleRef = useRef("");
+  let openingTextRef = useRef("");
+  let releaseDateRef = useRef("");
 
   function submitHandler(event) {
     event.preventDefault();
 
-    // could add validation here...
+    // could add validation here..
+    if (
+      titleRef.current.value.length === 0
+      // openingTextRef.current.value.length === 0 ||
+      // releaseDateRef.current.value.length === 0
+    ) {
+      alert("Please enter a valid value");
+      return;
+    }
 
     const movie = {
       title: titleRef.current.value,
@@ -19,6 +28,15 @@ function AddMovie(props) {
     };
 
     props.onAddMovie(movie);
+    // console.log(props.onFetchProp);
+    
+
+    titleRef.current.value = "";
+    openingTextRef.current.value = "";
+    releaseDateRef.current.value = "";
+
+    // props.onTestProp()
+    // props.onFetchProp();
   }
 
   return (
@@ -38,6 +56,6 @@ function AddMovie(props) {
       <button>Add Movie</button>
     </form>
   );
-}
+};
 
 export default AddMovie;
