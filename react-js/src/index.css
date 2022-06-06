@@ -77,19 +77,19 @@ ul p {
 }
 
 .btn1 {
-  border-radius: 100% !important;
+  border-radius: 50% !important;
 }
 
 .suc {
   background-color: #adff9e !important;
 }
 .suc:hover {
-  background-color: #3dff1a !important;
+  background-color: #26ff00 !important;
 }
 
 .del {
   background-color: #ff7a7a !important;
 }
 .del:hover{
-  background-color: #ff1a1a !important;
+  background-color: #ff2626 !important;
 }

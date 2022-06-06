@@ -2,7 +2,14 @@ import { Container, Row, Button } from "react-bootstrap";
 
 const ShowTask = (props) => {
   let emptyVar;
-  if (props.items.length === 0) {
+
+  if (props.isLoadingProp) {
+    emptyVar = (
+      <ul className="bg-light">
+        <p>{"⏳ Loading..."}</p>
+      </ul>
+    );
+  } else if (props.items.length === 0) {
     emptyVar = (
       <ul className="bg-secondary">
         <p>{"No Data Found"}</p>
@@ -11,13 +18,13 @@ const ShowTask = (props) => {
   } else if (props.items.length > 0) {
     emptyVar = props.items.map((newData) => (
       <ul className="d-flex justify-content-between">
-          <Button variant="success" className="btn1 suc">
-            ✔
-          </Button>
-          <p className="text-p">{newData.text}</p>
-          <Button variant="danger" className="btn1 del">
-            ❌
-          </Button>
+        <Button variant="success" className="btn1 suc">
+          ✔
+        </Button>
+        <p className="text-p">{newData.text}</p>
+        <Button variant="danger" className="btn1 del">
+          ❌
+        </Button>
       </ul>
     ));
   }

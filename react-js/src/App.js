@@ -20,8 +20,11 @@ function App() {
 
   // setExpenses([dataRecieved, ...expenses]) //wrong way
   // };
+
   ////////////////
+  const [isLoading, setIsLoading] = useState(false)
   const fetchTasks = async (taskText) => {
+    setIsLoading(true)
     const response = await fetch(
       "https://cus-hook3-default-rtdb.firebaseio.com/tasks.json"
     );
@@ -35,10 +38,11 @@ function App() {
     const loadedTasks = [];
 
     for (const taskKey in data) {
-      loadedTasks.push({ id: taskKey, text: data[taskKey].text });
+      loadedTasks.push({text: data[taskKey].text });
     }
 
     setTasks(loadedTasks);
+    setIsLoading(false)
   };
 
   useEffect(() => {
@@ -57,14 +61,14 @@ function App() {
       }
     );
     fetchTasks();
-    const data = await response.json();
+    // const data = await response.json();
   };
 
   return (
     <>
       <NewTask onSaveText={saveTextFunc}></NewTask>
 
-      <ShowTask items={tasks}></ShowTask>
+      <ShowTask items={tasks} isLoadingProp={isLoading}></ShowTask>
     </>
   );
 }
