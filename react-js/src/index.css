@@ -2,7 +2,7 @@
 
 * {
   box-sizing: border-box;
-  color: aliceblue;
+  color: black;
 }
 
 html {
@@ -28,15 +28,18 @@ body {
   border-radius: 10px !important;
 }
 
-.task-list{
+.task-list {
   padding: 0px !important;
 }
 
 ul {
-  padding-top: 10px !important;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
   font-size: 25px !important;
   border-bottom: 1px solid black;
   margin-bottom: 0px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
 }
 
 ul:hover {
@@ -44,11 +47,49 @@ ul:hover {
   background-color: blue;
 }
 
-
 .input-box {
   font-weight: 500 !important;
 }
 
-.input-box:focus{
-background-color: rgb(225, 241, 255) !important;
+.input-box:focus {
+  background-color: rgb(225, 241, 255) !important;
+}
+
+.success-btn {
+  display: inline !important;
+}
+
+.btn1 {
+  display: inline !important;
+}
+
+ul p {
+  display: inline !important;
+}
+
+.text-p {
+  justify-items: center !important;
+  margin-bottom: 0px !important;
+}
+
+.inputCon {
+  background-color: rgb(222, 151, 151);
+}
+
+.btn1 {
+  border-radius: 100% !important;
+}
+
+.suc {
+  background-color: #adff9e !important;
+}
+.suc:hover {
+  background-color: #3dff1a !important;
+}
+
+.del {
+  background-color: #ff5c5c !important;
+}
+.del:hover{
+  background-color: #ff1a1a !important;
 }
