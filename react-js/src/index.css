@@ -43,3 +43,12 @@ ul:hover {
   /* background-color: rgb(13, 110, 253) */
   background-color: blue;
 }
+
+
+.input-box {
+  font-weight: 500 !important;
+}
+
+.input-box:focus{
+background-color: rgb(232, 244, 255) !important;
+}

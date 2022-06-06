@@ -6,7 +6,7 @@ import {
   InputGroup,
   FormControl,
 } from "react-bootstrap";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const NewTask = () => {
   return (
@@ -14,14 +14,14 @@ const NewTask = () => {
       <Row className="pt-1 pb-1 align-items-center">
         <Col className="col-10">
           <div>
-            <InputGroup className="mt-3 mb-3">
-              <FormControl aria-label="Text input with checkbox" />
+            <InputGroup className="mt-3 mb-3 input-txt">
+              <FormControl className="input-box" aria-label="Text input with checkbox" />
             </InputGroup>
           </div>
         </Col>
         <Col className="col-but col-2">
           <div>
-            <Button variant="warning">Warning</Button>{" "}
+            <Button variant="warning">Enter Task</Button>{" "}
           </div>
         </Col>
       </Row>
