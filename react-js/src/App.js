@@ -1,7 +1,7 @@
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import NewTask from "./comps/NewTask";
 import ShowTask from "./comps/ShowTask";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const testData = [];
@@ -22,9 +22,9 @@ function App() {
   // };
 
   ////////////////
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const fetchTasks = async (taskText) => {
-    setIsLoading(true)
+    setIsLoading(true);
     const response = await fetch(
       "https://cus-hook3-default-rtdb.firebaseio.com/tasks.json"
     );
@@ -38,11 +38,13 @@ function App() {
     const loadedTasks = [];
 
     for (const taskKey in data) {
-      loadedTasks.push({text: data[taskKey].text });
+      // console.log(taskKey);
+
+      loadedTasks.push({ text: data[taskKey].text });
     }
 
     setTasks(loadedTasks);
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   useEffect(() => {
