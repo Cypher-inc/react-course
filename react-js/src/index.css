@@ -93,3 +93,8 @@ ul p {
 .del:hover{
   background-color: #ff2626 !important;
 }
+
+
+.rowFade p{
+  text-decoration: line-through;
+}
