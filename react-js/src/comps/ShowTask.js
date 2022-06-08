@@ -6,14 +6,23 @@ const ShowTask = (props) => {
 
   const [addClass, setAddClass] = useState();
 
-
   const addClassFunc = () => {
     if (!addClass) {
       setAddClass(true);
     } else {
       setAddClass(false);
     }
+  };
 
+  const deleteTextFunc = () => {
+    console.log(props.items[1].text);
+    console.log(props.items[1].id);
+
+    var testVar = props.items.filter((new1) => new1.text);
+
+    // console.log(testVar);
+
+    props.onDeleteText(testVar)
   };
 
   if (props.isLoadingProp) {
@@ -34,8 +43,8 @@ const ShowTask = (props) => {
         <Button variant="success" className="btn1 suc" onClick={addClassFunc}>
           ✔
         </Button>
-        <p className="text-p">{newData.text}</p>
-        <Button variant="danger" className="btn1 del">
+        <p className={`text-p ${addClass ? "rowFade" : ""}`}>{newData.text}</p>
+        <Button variant="danger" className="btn1 del" onClick={deleteTextFunc}>
           ❌
         </Button>
       </ul>
@@ -45,9 +54,7 @@ const ShowTask = (props) => {
   return (
     <Container className="inputCon bg-primary mt-2 mb-5 ">
       <Row className="text-center">
-        <div className={`task-list ${addClass ? "rowFade" : ""}`}>
-          {emptyVar}
-        </div>
+        <div className={`task-list`}>{emptyVar}</div>
       </Row>
     </Container>
   );
