@@ -6,8 +6,8 @@ import {
   Col,
   InputGroup,
   FormControl,
-  Alert,
 } from "react-bootstrap";
+import { uid } from "uid";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const NewTask = (props) => {
@@ -19,13 +19,13 @@ const NewTask = (props) => {
 
   const submitFunc = (event) => {
     event.preventDefault();
-    if(inputText.length===0){
-      alert('Input Text empty!')
-      return
+    if (inputText.length === 0) {
+      alert("Input Text empty!");
+      return;
     }
     const textData = {
-      id: Math.floor(Math.random() * 1000),
-      text: inputText,
+      todo: inputText,
+      uuid: uid(),
     };
     props.onSaveText(textData);
     // console.log(textData.id);

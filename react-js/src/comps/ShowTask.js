@@ -15,10 +15,7 @@ const ShowTask = (props) => {
   };
 
   const deleteTextFunc = (testVar) => {
-    // console.log(props.items[1].text);
-    // console.log(props.items[1].id);
-
-    console.log(testVar);
+    // console.log(testVar);
     props.onDeleteText(testVar)
   };
 
