@@ -24,10 +24,12 @@ const NewTask = (props) => {
       return
     }
     const textData = {
+      id: Math.floor(Math.random() * 1000),
       text: inputText,
     };
     props.onSaveText(textData);
-    console.log(inputText);
+    // console.log(textData.id);
+    // console.log(inputText);
 
     setInputText("");
   };

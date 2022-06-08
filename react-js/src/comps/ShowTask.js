@@ -14,14 +14,11 @@ const ShowTask = (props) => {
     }
   };
 
-  const deleteTextFunc = () => {
-    console.log(props.items[1].text);
-    console.log(props.items[1].id);
+  const deleteTextFunc = (testVar) => {
+    // console.log(props.items[1].text);
+    // console.log(props.items[1].id);
 
-    var testVar = props.items.filter((new1) => new1.text);
-
-    // console.log(testVar);
-
+    console.log(testVar);
     props.onDeleteText(testVar)
   };
 
@@ -44,7 +41,11 @@ const ShowTask = (props) => {
           ✔
         </Button>
         <p className={`text-p ${addClass ? "rowFade" : ""}`}>{newData.text}</p>
-        <Button variant="danger" className="btn1 del" onClick={deleteTextFunc}>
+        <Button
+          variant="danger"
+          className="btn1 del"
+          onClick={() => deleteTextFunc(newData)}
+        >
           ❌
         </Button>
       </ul>

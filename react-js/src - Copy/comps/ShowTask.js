@@ -1,14 +1,25 @@
 import { Container, Row, Button } from "react-bootstrap";
+import { useState } from "react";
 
 const ShowTask = (props) => {
   let emptyVar;
-  let addClassBtn;
+
+  const [addClass, setAddClass] = useState();
+
   const addClassFunc = () => {
-    if (addClassBtn) {
-      addClassBtn = false;
+    if (!addClass) {
+      setAddClass(true);
     } else {
-      addClassBtn = true;
+      setAddClass(false);
     }
+  };
+
+  const deleteTextFunc = (testVar) => {
+    // console.log(props.items[1].text);
+    // console.log(props.items[1].id);
+
+    console.log(testVar);
+    props.onDeleteText(testVar)
   };
 
   if (props.isLoadingProp) {
@@ -29,8 +40,12 @@ const ShowTask = (props) => {
         <Button variant="success" className="btn1 suc" onClick={addClassFunc}>
           ✔
         </Button>
-        <p className="text-p">{newData.text}</p>
-        <Button variant="danger" className="btn1 del">
+        <p className={`text-p ${addClass ? "rowFade" : ""}`}>{newData.text}</p>
+        <Button
+          variant="danger"
+          className="btn1 del"
+          onClick={() => deleteTextFunc(newData)}
+        >
           ❌
         </Button>
       </ul>
@@ -40,9 +55,7 @@ const ShowTask = (props) => {
   return (
     <Container className="inputCon bg-primary mt-2 mb-5 ">
       <Row className="text-center">
-        <div className={`task-list" ${addClassBtn ? "rowFade" : ""}`}>
-          {emptyVar}
-        </div>
+        <div className={`task-list`}>{emptyVar}</div>
       </Row>
     </Container>
   );

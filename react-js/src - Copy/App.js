@@ -40,9 +40,13 @@ function App() {
     for (const taskKey in data) {
       // console.log(taskKey);
 
-      loadedTasks.push({ text: data[taskKey].text });
+      loadedTasks.push({
+        id: data[taskKey].id,
+        text: data[taskKey].text,
+      });
     }
 
+    // console.log(loadedTasks);
     setTasks(loadedTasks);
     setIsLoading(false);
   };
@@ -62,15 +66,58 @@ function App() {
         },
       }
     );
+
     fetchTasks();
     // const data = await response.json();
+  };
+
+  ///Delelte
+
+  const deleteTextFunc = async (taskText) => {
+    setIsLoading(true);
+    console.log(taskText);
+
+    const response = await fetch(
+      "https://cus-hook3-default-rtdb.firebaseio.com/tasks.json",
+      { method: "DELETE" }
+    );
+
+    if (!response.ok) {
+      throw new Error("Request failed!");
+    }
+
+    const data = await response.json();
+
+    const loadedTasks = [];
+
+    for (const taskText in data) {
+      // console.log(taskKey);
+
+      loadedTasks.push({
+        id: data[taskText].id,
+        text: data[taskText].text,
+      });
+    }
+
+    loadedTasks.pop();
+
+    console.log(loadedTasks);
+
+    setTasks(loadedTasks);
+
+    fetchTasks();
+    setIsLoading(false);
   };
 
   return (
     <>
       <NewTask onSaveText={saveTextFunc}></NewTask>
 
-      <ShowTask items={tasks} isLoadingProp={isLoading}></ShowTask>
+      <ShowTask
+        items={tasks}
+        isLoadingProp={isLoading}
+        onDeleteText={deleteTextFunc}
+      ></ShowTask>
     </>
   );
 }

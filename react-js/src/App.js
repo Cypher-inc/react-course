@@ -77,39 +77,35 @@ function App() {
     setIsLoading(true);
     console.log(taskText);
 
-    // const response = await fetch(
-    //   "https://cus-hook3-default-rtdb.firebaseio.com/tasks.json",
-    //   {
-    //     method: "DELETE",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   }
-    // );
+    const response = await fetch(
+      "https://cus-hook3-default-rtdb.firebaseio.com/tasks.json",
+      { method: "DELETE" }
+    );
 
-    // if (!response.ok) {
-    //   throw new Error("Request failed!");
-    // }
+    if (!response.ok) {
+      throw new Error("Request failed!");
+    }
 
-    // const data = await response.json();
+    const data = await response.json();
 
-    // const loadedTasks = [];
+    const loadedTasks = [];
 
-    // for (const taskKey in data) {
-    //   loadedTasks.push({
-    //     text: data[taskKey].text,
-    //   });
-    // }
+    for (const taskText in data) {
+      // console.log(taskKey);
 
-    // loadedTasks.pop({ text: taskText.text });
-    // console.log(loadedTasks);
+      loadedTasks.push({
+        id: data[taskText].id,
+        text: data[taskText].text,
+      });
+    }
 
-    taskText.pop();
-    console.log(taskText);
+    loadedTasks.pop();
 
-    setTasks(taskText);
+    console.log(loadedTasks);
 
-    // fetchTasks();
+    setTasks(loadedTasks);
+
+    fetchTasks();
     setIsLoading(false);
   };
 
