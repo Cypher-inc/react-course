@@ -12,6 +12,7 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const NewTask = (props) => {
   const [inputText, setInputText] = useState("");
+
   const changeFunc = (event) => {
     // console.log(inputText);
     setInputText(event.target.value);
@@ -26,6 +27,7 @@ const NewTask = (props) => {
     const textData = {
       todo: inputText,
       uuid: uid(),
+      taskStatus: false,
     };
     props.onSaveText(textData);
     // console.log(textData.id);

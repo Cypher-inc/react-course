@@ -4,7 +4,7 @@ import ShowTask from "./comps/ShowTask";
 import { useState, useEffect } from "react";
 import { db } from "./firebase";
 import { uid } from "uid";
-import { onValue, ref, remove, set } from "firebase/database";
+import { onValue, ref, remove, set, update } from "firebase/database";
 
 function App() {
   const testData = [];
@@ -13,41 +13,6 @@ function App() {
 
   ////////////////
   const [isLoading, setIsLoading] = useState(false);
-
-  // const fetchTasks = async (taskText) => {
-  //   console.log('Fetch running');
-
-  //   setIsLoading(true);
-  //   const response = await fetch(
-  //     "https://crud-react1-f14ef-default-rtdb.firebaseio.com/"
-  //   );
-
-  //   if (!response.ok) {
-  //     throw new Error("Request failed!");
-  //   }
-
-  //   const data = await response.json();
-  //   console.log(data);
-
-  //   const loadedTasks = [];
-
-  //   for (const taskKey in data) {
-  //     console.log(taskKey);
-
-  //     loadedTasks.push({
-  //       text: data[taskKey].text,
-  //     });
-  //   }
-  //   // console.log(loadedTasks);
-  //   setTasks(loadedTasks);
-  //   setIsLoading(false);
-  // };
-
-  // useEffect(() => {
-  //   fetchTasks();
-  //   // onValue(ref(db),
-  //   // )
-  // }, []);
 
   const fetchTasks = (taskText) => {
     setIsLoading(true);
@@ -63,6 +28,7 @@ function App() {
         loadedTasks.push({
           id: data[taskKey].uuid,
           text: data[taskKey].todo,
+          done: data[taskKey].taskStatus,
         });
       }
       // console.log(loadedTasks);
@@ -84,9 +50,21 @@ function App() {
 
   ///Delelte
   const deleteTextFunc = (taskText) => {
-    console.log(taskText.id);
+    console.log(taskText);
     remove(ref(db, `/${taskText.id}`));
     // fetchTasks();
+  };
+
+  ///update
+  const updateFunc = (taskData) => {
+    console.log(taskData.id);
+    
+    update(ref(db, `/${taskData.id}`),
+    {
+      taskStatus: true,
+      // uuid: taskData.id
+    })
+    console.log(taskData);
   };
 
   return (
@@ -97,6 +75,7 @@ function App() {
         items={tasks}
         isLoadingProp={isLoading}
         onDeleteText={deleteTextFunc}
+        onDone={updateFunc}
       ></ShowTask>
     </>
   );
