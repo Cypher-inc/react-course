@@ -50,20 +50,22 @@ function App() {
 
   ///Delelte
   const deleteTextFunc = (taskText) => {
-    console.log(taskText);
     remove(ref(db, `/${taskText.id}`));
+    // db().ref(`/${taskText.id}`).remove();
     // fetchTasks();
+    console.log(taskText);
+
   };
 
   ///update
   const updateFunc = (taskData) => {
     console.log(taskData.id);
-    
-    update(ref(db, `/${taskData.id}`),
-    {
-      taskStatus: true,
-      // uuid: taskData.id
-    })
+    // update(ref(db, `/${taskData.id}`),
+    // {
+    //   taskStatus: true,
+    //   // todo: 'Hello WOrld'
+    //   // uuid: taskData.id
+    // })
     console.log(taskData);
   };
 
