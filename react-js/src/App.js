@@ -2,9 +2,9 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import NewTask from "./comps/NewTask";
 import ShowTask from "./comps/ShowTask";
 import { useState, useEffect } from "react";
-import { db } from "./firebase";
-import { uid } from "uid";
-import { onValue, ref, remove, set, update } from "firebase/database";
+import { db, app } from "./firebase";
+import { onValue, ref, remove, set, update, push, orderByValue} from "firebase/database";
+// import { firebase } from "./firebase";
 
 function App() {
   const testData = [];
@@ -41,15 +41,24 @@ function App() {
     fetchTasks();
   }, []);
 
-
   const saveTextFunc = (TextData) => {
-    // setTasks((prevTasks) => prevTasks.concat(TextData));
-
     console.log(TextData.todo);
-    
-    set(ref(db, `/${TextData.uuid}`), {
-      ...TextData
-    });
+
+    // set(ref(db, `/${TextData.uuid}`), {
+    //   ...TextData
+    // });
+
+    const postListRef = ref(db, `/${TextData.uuid}`);
+    // const newPostRef = push(postListRef);
+    set(postListRef, {
+      ...TextData,
+    }, orderByValue());
+
+    // var messageListRef = firebase.database().ref('message_list');
+    // var newMessageRef = messageListRef.push();
+    // newMessageRef.set({
+    //   ...TextData
+    // });
   };
 
   ///Delelte
@@ -58,7 +67,6 @@ function App() {
     // db().ref(`/${taskText.id}`).remove();
     // fetchTasks();
     console.log(taskText);
-
   };
 
   ///update
@@ -67,7 +75,7 @@ function App() {
     update(ref(db, `/${taskData.id}`), {
       todo: taskData.text,
       uuid: taskData.id,
-      taskStatus: !taskData.done
+      taskStatus: !taskData.done,
     });
     console.log(taskData);
   };
