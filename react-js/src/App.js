@@ -41,11 +41,15 @@ function App() {
     fetchTasks();
   }, []);
 
-  const saveTextFunc = (taskText) => {
-    const uuid = uid();
-    set(ref(db, `/${uuid}`), { ...taskText });
-    // fetchTasks();
-    // const data = await response.json();
+
+  const saveTextFunc = (TextData) => {
+    // setTasks((prevTasks) => prevTasks.concat(TextData));
+
+    console.log(TextData.todo);
+    
+    set(ref(db, `/${TextData.uuid}`), {
+      ...TextData
+    });
   };
 
   ///Delelte
@@ -60,12 +64,11 @@ function App() {
   ///update
   const updateFunc = (taskData) => {
     console.log(taskData.id);
-    // update(ref(db, `/${taskData.id}`),
-    // {
-    //   taskStatus: true,
-    //   // todo: 'Hello WOrld'
-    //   // uuid: taskData.id
-    // })
+    update(ref(db, `/${taskData.id}`), {
+      todo: taskData.text,
+      uuid: taskData.id,
+      taskStatus: !taskData.done
+    });
     console.log(taskData);
   };
 

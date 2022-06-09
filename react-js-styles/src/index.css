@@ -1,11 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
 * {
   box-sizing: border-box;
+  color: black;
 }
 
 html {
-  font-family: sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 body {
   margin: 0;
+  background-color: #282b30 !important;
+}
+
+.inputCon {
+  width: 50% !important;
+  margin-left: 25% !important;
+  margin-right: 25% !important;
+}
+
+.col-but button {
+  float: right !important;
+}
+
+.inputCon {
+  border-radius: 10px !important;
+}
+
+.task-list {
+  padding: 0px !important;
+}
+
+ul {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  font-size: 25px !important;
+  border-bottom: 1px solid black;
+  margin-bottom: 0px !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+ul:hover {
+  /* background-color: rgb(13, 110, 253) */
+  background-color: blue;
+}
+
+.input-box {
+  font-weight: 500 !important;
+}
+
+.input-box:focus {
+  background-color: rgb(225, 241, 255) !important;
+}
+
+.success-btn {
+  display: inline !important;
+}
+
+.btn1 {
+  display: inline !important;
+}
+
+ul p {
+  display: inline !important;
+}
+
+.text-p {
+  justify-items: center !important;
+  margin-bottom: 0px !important;
+}
+
+.inputCon {
+  background-color: rgb(222, 151, 151);
+}
+
+.btn1 {
+  border-radius: 50% !important;
+}
+
+.suc {
+  background-color: #adff9e !important;
+}
+.suc:hover {
+  background-color: #26ff00 !important;
+}
+
+.del {
+  background-color: #ff7a7a !important;
+}
+.del:hover{
+  background-color: #ff2626 !important;
+}
+
+
+.rowFade{
+  text-decoration: line-through;
 }

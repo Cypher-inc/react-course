@@ -1,49 +1,87 @@
-import React, { useState } from "react";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import NewTask from "./comps/NewTask";
+import ShowTask from "./comps/ShowTask";
+import { useState, useEffect } from "react";
+import { db } from "./firebase";
+import { uid } from "uid";
+import { onValue, ref, remove, set, update } from "firebase/database";
 
-import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalList";
-import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
-import "./App.css";
+function App() {
+  const testData = [];
 
-const App = () => {
-  const [courseGoals, setCourseGoals] = useState([
-    { text: "Do all exercises!", id: "g1" },
-    { text: "Finish the course!", id: "g2" },
-  ]);
+  const [tasks, setTasks] = useState(testData);
 
-  const addGoalHandler = (enteredText) => {
-    setCourseGoals((prevGoals) => {
-      const updatedGoals = [...prevGoals];
-      updatedGoals.unshift({ text: enteredText, id: Math.random().toString() });
-      // console.log(updatedGoals.id);
-      return updatedGoals;
+  ////////////////
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchTasks = (taskText) => {
+    setIsLoading(true);
+
+    onValue(ref(db), (snapshot) => {
+      const data = snapshot.val();
+      // console.log(data);
+
+      const loadedTasks = [];
+      for (const taskKey in data) {
+        // console.log(taskKey);
+
+        loadedTasks.push({
+          id: data[taskKey].uuid,
+          text: data[taskKey].todo,
+          done: data[taskKey].taskStatus,
+        });
+      }
+      // console.log(loadedTasks);
+      setTasks(loadedTasks);
+      setIsLoading(false);
     });
   };
 
-  const deleteItemHandler = (goalId) => {
-    setCourseGoals((prevGoals) => {
-      const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);
-      return updatedGoals;
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+
+  const saveTextFunc = (TextData) => {
+    console.log(TextData.todo);
+    
+    set(ref(db, `/${TextData.uuid}`), {
+      ...TextData
     });
   };
 
-  let content = (
-    <p style={{ textAlign: "center" }}>No goals found. Maybe add one?</p>
-  );
+  ///Delelte
+  const deleteTextFunc = (taskText) => {
+    remove(ref(db, `/${taskText.id}`));
+    // db().ref(`/${taskText.id}`).remove();
+    // fetchTasks();
+    console.log(taskText);
 
-  if (courseGoals.length > 0) {
-    content = (
-      <CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />
-    );
-  }
+  };
+
+  ///update
+  const updateFunc = (taskData) => {
+    console.log(taskData.id);
+    update(ref(db, `/${taskData.id}`), {
+      todo: taskData.text,
+      uuid: taskData.id,
+      taskStatus: !taskData.done
+    });
+    console.log(taskData);
+  };
 
   return (
-    <div>
-      <section id="goal-form">
-        <CourseInput onAddGoal={addGoalHandler} />
-      </section>
-      <section id="goals">{content}</section>
-    </div>
+    <>
+      <NewTask onSaveText={saveTextFunc}></NewTask>
+
+      <ShowTask
+        items={tasks}
+        isLoadingProp={isLoading}
+        onDeleteText={deleteTextFunc}
+        onDone={updateFunc}
+      ></ShowTask>
+    </>
   );
-};
+}
 
 export default App;

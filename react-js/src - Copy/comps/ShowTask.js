@@ -6,20 +6,15 @@ const ShowTask = (props) => {
 
   const [addClass, setAddClass] = useState();
 
-  const addClassFunc = () => {
-    if (!addClass) {
-      setAddClass(true);
-    } else {
-      setAddClass(false);
-    }
+  const addClassFunc = (newData0) => {
+    if (!newData0.done) setAddClass(true)
+    // console.log(newData0.text);
+    props.onDone(newData0)
   };
 
-  const deleteTextFunc = (testVar) => {
-    // console.log(props.items[1].text);
-    // console.log(props.items[1].id);
-
-    console.log(testVar);
-    props.onDeleteText(testVar)
+  const deleteTextFunc = (newData1) => {
+    // console.log(testVar);
+    props.onDeleteText(newData1);
   };
 
   if (props.isLoadingProp) {
@@ -37,10 +32,14 @@ const ShowTask = (props) => {
   } else if (props.items.length > 0) {
     emptyVar = props.items.map((newData) => (
       <ul className="d-flex justify-content-between">
-        <Button variant="success" className="btn1 suc" onClick={addClassFunc}>
+        <Button
+          variant="success"
+          className="btn1 suc"
+          onClick={() => addClassFunc(newData)}
+        >
           ✔
         </Button>
-        <p className={`text-p ${addClass ? "rowFade" : ""}`}>{newData.text}</p>
+        <p className={`text-p ${newData.done ? "rowFade" : ""}`}>{newData.text}</p>
         <Button
           variant="danger"
           className="btn1 del"

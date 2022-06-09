@@ -1,17 +1,19 @@
 import { Container, Row, Button } from "react-bootstrap";
 import { useState } from "react";
+import { db } from "../firebase";
+import { onValue, ref, remove, set, update } from "firebase/database";
 
 const ShowTask = (props) => {
   let emptyVar;
 
-  const [addClass, setAddClass] = useState();
-
+  ///update
   const addClassFunc = (newData0) => {
-    if (!newData0.done) setAddClass(true)
     // console.log(newData0.text);
     props.onDone(newData0)
   };
 
+
+  /////delete
   const deleteTextFunc = (newData1) => {
     // console.log(testVar);
     props.onDeleteText(newData1);
