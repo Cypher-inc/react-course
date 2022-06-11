@@ -49,7 +49,7 @@ function App() {
     //   setIsLoading(false);
     // });
 
-      const test = query(ref(db), orderByChild("timeStamp"));
+    const test = query(ref(db), orderByChild("timeStamp"));
     onValue(test, (snapshot) => {
       const loadedTasks = [];
       snapshot.forEach((child) => {
@@ -62,7 +62,7 @@ function App() {
           time: data.timeStamp,
         });
       });
-      setTasks(loadedTasks)
+      setTasks(loadedTasks);
       setIsLoading(false);
     });
   };
