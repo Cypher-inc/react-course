@@ -7,6 +7,7 @@ import {
   InputGroup,
   FormControl,
 } from "react-bootstrap";
+import { db } from "../firebase";
 import { uid } from "uid";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
@@ -24,14 +25,19 @@ const NewTask = (props) => {
       alert("Input Text empty!");
       return;
     }
+    const uuid = uid();
     const textData = {
       todo: inputText,
-      uuid: uid(),
+      uuid,
       taskStatus: false,
     };
     props.onSaveText(textData);
+    // set(ref(db, `/${uuid}`), {
+    //   ...textData
+    // });
+
     // console.log(textData.id);
-    // console.log(inputText);
+    console.log(inputText);
 
     setInputText("");
   };

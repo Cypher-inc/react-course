@@ -3,7 +3,17 @@ import NewTask from "./comps/NewTask";
 import ShowTask from "./comps/ShowTask";
 import { useState, useEffect } from "react";
 import { db, app } from "./firebase";
-import { onValue, ref, remove, set, update, push, orderByValue} from "firebase/database";
+import {
+  onValue,
+  ref,
+  remove,
+  set,
+  update,
+  push,
+  orderByValue,
+  query,
+  orderByChild,
+} from "firebase/database";
 // import { firebase } from "./firebase";
 
 function App() {
@@ -14,25 +24,45 @@ function App() {
   ////////////////
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchTasks = (taskText) => {
+  const fetchTasks = () => {
     setIsLoading(true);
 
-    onValue(ref(db), (snapshot) => {
-      const data = snapshot.val();
-      // console.log(data);
+    // const test = query(ref(db),orderByChild("timeStamp"))
+    // onValue(test, (snapshot) => {
+    //   const data = snapshot.val();
+    //   // console.log(data);
 
+    //   const loadedTasks = [];
+    //   for (const taskKey in data) {
+    //     // console.log(taskKey);
+
+    //     loadedTasks.push({
+    //       id: data[taskKey].uuid,
+    //       text: data[taskKey].todo,
+    //       done: data[taskKey].taskStatus,
+    //       time: data[taskKey].timeStamp
+    //     });
+    //   }
+    //   console.log(loadedTasks);
+
+    //   setTasks(loadedTasks);
+    //   setIsLoading(false);
+    // });
+
+    const test = query(ref(db), orderByChild("timeStamp"));
+    onValue(test, (snapshot) => {
       const loadedTasks = [];
-      for (const taskKey in data) {
-        // console.log(taskKey);
-
+      snapshot.forEach((child) => {
+        const data = child.val();
+        console.log(data);
         loadedTasks.push({
-          id: data[taskKey].uuid,
-          text: data[taskKey].todo,
-          done: data[taskKey].taskStatus,
+          id: data.uuid,
+          text: data.todo,
+          done: data.taskStatus,
+          time: data.timeStamp,
         });
-      }
-      // console.log(loadedTasks);
-      setTasks(loadedTasks);
+      });
+      setTasks(loadedTasks)
       setIsLoading(false);
     });
   };
@@ -42,23 +72,16 @@ function App() {
   }, []);
 
   const saveTextFunc = (TextData) => {
-    console.log(TextData.todo);
+    // console.log(TextData.todo);
 
     // set(ref(db, `/${TextData.uuid}`), {
     //   ...TextData
     // });
 
-    const postListRef = ref(db, `/${TextData.uuid}`);
-    // const newPostRef = push(postListRef);
-    set(postListRef, {
+    const test = query(ref(db, `/${TextData.uuid}`));
+    set(test, {
       ...TextData,
-    }, orderByValue());
-
-    // var messageListRef = firebase.database().ref('message_list');
-    // var newMessageRef = messageListRef.push();
-    // newMessageRef.set({
-    //   ...TextData
-    // });
+    });
   };
 
   ///Delelte
@@ -66,7 +89,7 @@ function App() {
     remove(ref(db, `/${taskText.id}`));
     // db().ref(`/${taskText.id}`).remove();
     // fetchTasks();
-    console.log(taskText);
+    // console.log(taskText);
   };
 
   ///update

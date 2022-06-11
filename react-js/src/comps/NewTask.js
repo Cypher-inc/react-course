@@ -30,6 +30,7 @@ const NewTask = (props) => {
       todo: inputText,
       uuid,
       taskStatus: false,
+      timeStamp: new Date().getTime(),
     };
     props.onSaveText(textData);
     // set(ref(db, `/${uuid}`), {
@@ -37,7 +38,7 @@ const NewTask = (props) => {
     // });
 
     // console.log(textData.id);
-    console.log(inputText);
+    // console.log(inputText);
 
     setInputText("");
   };
