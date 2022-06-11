@@ -47,7 +47,7 @@ function App() {
 
     //   setTasks(loadedTasks);
     //   setIsLoading(false);
-    // });
+    //  });
 
     const test = query(ref(db), orderByChild("timeStamp"));
     onValue(test, (snapshot) => {
