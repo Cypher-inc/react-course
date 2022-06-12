@@ -18,8 +18,8 @@ const ShowTask = (props) => {
 
   if (props.isLoadingProp) {
     emptyVar = (
-      <ul className="bg-light">
-        <p>{"⏳ Loading..."}</p>
+      <ul className="bg-light text-center">
+        <p className="loadingP">{"⏳ Loading..."}</p>
       </ul>
     );
   } else if (props.items.length === 0) {
@@ -30,11 +30,11 @@ const ShowTask = (props) => {
     );
   } else if (props.items.length > 0) {
     emptyVar = props.items.map((newData) => (
-      <div className="text-center borderRadius">
+      <div className="text-center taskItem">
         <ul
           className={`${
             newData.done ? "rowFade" : ""
-          } d-flex justify-content-between `}
+          } d-flex justify-content-between align-items-center`}
         >
           <Button
             variant="success"
@@ -60,7 +60,7 @@ const ShowTask = (props) => {
 
   return (
     <Container className="displayCon mt-1 mb-5 ">
-      <Row>{emptyVar}</Row>
+      <Row className="displayRow">{emptyVar}</Row>
     </Container>
   );
 };

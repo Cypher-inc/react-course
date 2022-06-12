@@ -72,7 +72,7 @@ function App() {
   };
 
   return (
-    <Container className="glassEffect mt-5 mb-3">
+    <Container className="glassEffect mb-3">
       <Row>
         <NewTask onSaveText={saveTextFunc}></NewTask>
         <ShowTask

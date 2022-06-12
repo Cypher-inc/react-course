@@ -2,24 +2,26 @@ ul {
   padding-top: 7px;
   padding-bottom: 7px;
   font-size: 25px;
+
   /* border-bottom: 1px solid black; */
   margin-bottom: 0px !important;
   padding-left: 5px !important;
   padding-right: 5px !important;
 }
 
-.borderRadius {
-  background-color: rgb(5, 5, 5, 0.3);
+.taskItem {
+  background-color: rgb(5, 5, 5, 0.35);
   border: 1px solid rgb(0, 0, 0, 0.2);
   margin-bottom: 20px;
-  border-radius: 100px;
+  border-radius: 40px;
   padding-left: 0px !important;
   padding-right: 0px;
 }
 
-.borderRadius:hover {
+.taskItem:hover {
   /* background-color: rgb(13, 110, 253) */
-  background-color: rgb(5, 5, 5, 0.5);
+  background-color: rgb(5, 5, 5, 0.55);
+  /* border: 1px solid rgb(0, 0, 0, 0.5); */
 }
 
 .btn1 {
@@ -59,4 +61,29 @@ ul {
 .text-p {
   justify-items: center !important;
   margin-bottom: 0px !important;
+}
+
+ul.bg-light,
+.loadingP {
+  border-radius: 50px;
+  color: black;
+  border-radius: 50px;
+}
+
+@media (max-width: 575.98px) {
+  .displayCon {
+    width: 70% !important;
+    margin-left: 15% !important;
+    margin-right: 15% !important;
+  }
+  h1 {
+    font-size: 10vw;
+  }
+
+  .btn1 {
+    font-size: 0.4em !important;
+  }
+  .text-p {
+    font-size: 0.7em !important;
+  }
 }

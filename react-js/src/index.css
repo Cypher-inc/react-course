@@ -22,11 +22,29 @@ body {
   width: 60% !important;
   margin-left: 20% !important;
   margin-right: 20% !important;
-  background: rgba(0, 0, 0, 0.2) !important;
-  /* backdrop-filter: saturate(180%) blur(10px) !important; */
+  margin-top: 4%;
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(183, 178, 178, 0.1) 0px 7px 29px 0px;
 }
 
-ul p {
+/* ul p {
   display: inline !important;
+} */
+
+/* ///////////media queries///////// */
+
+@media (max-width: 991.98px) {
+  .glassEffect {
+    width: 80% !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+  }
 }
 
+@media (max-width: 575.98px) {
+  .glassEffect {
+    width: 95% !important;
+    margin-left: 2.5% !important;
+    margin-right: 2.5% !important;
+  }
+}

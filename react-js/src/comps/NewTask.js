@@ -26,35 +26,29 @@ const NewTask = (props) => {
       timeStamp: new Date().getTime(),
     };
     props.onSaveText(textData);
-    // set(ref(db, `/${uuid}`), {
-    //   ...textData
-    // });
-
-    // console.log(textData.id);
-    // console.log(inputText);
 
     setInputText("");
   };
 
   return (
-    <Container className="inputCon mt-4 mb-5 ">
+    <Container className="inputCon mt-4 mb-4">
       <Row>
-      <h1 className="text-center mt-5">To-do List</h1>
-      <form onSubmit={submitFunc}>
-        <InputGroup className="mt-3 mb-3 input-txt">
-          <Form.Control
-            className="inputBox"
-            onChange={changeFunc}
-            value={inputText}
-            placeholder="Enter task.."
-            aria-label="Enter tasks"
-            aria-describedby="basic-addon2"
-          />
-          <Button variant="warning" type="submit" className="inputBoxBtn">
-            Enter Task
-          </Button>{" "}
-        </InputGroup>
-      </form>
+        <h1 className="text-center mt-4">To-Do List</h1>
+        <form onSubmit={submitFunc}>
+          <InputGroup className="mt-3 mb-3 input-txt">
+            <Form.Control
+              className="inputBox"
+              onChange={changeFunc}
+              value={inputText}
+              placeholder="Enter task.."
+              aria-label="Enter tasks"
+              aria-describedby="basic-addon2"
+            />
+            <Button variant="warning" type="submit" className="inputBoxBtn">
+              Enter Task
+            </Button>{" "}
+          </InputGroup>
+        </form>
       </Row>
     </Container>
   );
