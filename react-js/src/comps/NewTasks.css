@@ -1,0 +1,22 @@
+.inputBox:focus {
+  background-color: rgb(230, 244, 255) !important;
+}
+
+.inputBox:focus::placeholder {
+  color: transparent;
+}
+
+.inputBox {
+  font-weight: 500;
+}
+
+.inputBox, .inputBoxBtn{
+    border-radius: 100px;
+}
+
+.inputCon {
+    width: 80% !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    border-radius: 10px !important;
+  }

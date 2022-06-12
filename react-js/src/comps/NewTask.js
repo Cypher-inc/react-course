@@ -1,15 +1,8 @@
 import { useState } from "react";
-import {
-  Container,
-  Row,
-  Button,
-  Col,
-  InputGroup,
-  FormControl,
-} from "react-bootstrap";
-import { db } from "../firebase";
+import { Container, Row, Button, InputGroup, Form } from "react-bootstrap";
 import { uid } from "uid";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../comps/NewTasks.css";
 
 const NewTask = (props) => {
   const [inputText, setInputText] = useState("");
@@ -44,31 +37,26 @@ const NewTask = (props) => {
   };
 
   return (
-    <form onSubmit={submitFunc}>
-      <Container className="inputCon bg-primary mt-5 mb-4">
-        <Row className="pt-1 pb-1 align-items-center">
-          <Col className="col-10">
-            <div>
-              <InputGroup className="mt-3 mb-3 input-txt">
-                <FormControl
-                  onChange={changeFunc}
-                  value={inputText}
-                  className="input-box"
-                  aria-label="Text input with checkbox"
-                />
-              </InputGroup>
-            </div>
-          </Col>
-          <Col className="col-but col-2">
-            <div>
-              <Button variant="warning" type="submit">
-                Enter Task
-              </Button>{" "}
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </form>
+    <Container className="inputCon mt-4 mb-5 ">
+      <Row>
+      <h1 className="text-center mt-5">To-do List</h1>
+      <form onSubmit={submitFunc}>
+        <InputGroup className="mt-3 mb-3 input-txt">
+          <Form.Control
+            className="inputBox"
+            onChange={changeFunc}
+            value={inputText}
+            placeholder="Enter task.."
+            aria-label="Enter tasks"
+            aria-describedby="basic-addon2"
+          />
+          <Button variant="warning" type="submit" className="inputBoxBtn">
+            Enter Task
+          </Button>{" "}
+        </InputGroup>
+      </form>
+      </Row>
+    </Container>
   );
 };
 export default NewTask;

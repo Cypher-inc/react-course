@@ -2,19 +2,17 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import NewTask from "./comps/NewTask";
 import ShowTask from "./comps/ShowTask";
 import { useState, useEffect } from "react";
-import { db, app } from "./firebase";
+import { db } from "./firebase";
 import {
   onValue,
   ref,
   remove,
   set,
   update,
-  push,
-  orderByValue,
   query,
   orderByChild,
 } from "firebase/database";
-// import { firebase } from "./firebase";
+import { Container, Row, Button } from "react-bootstrap";
 
 function App() {
   const testData = [];
@@ -24,30 +22,9 @@ function App() {
   ////////////////
   const [isLoading, setIsLoading] = useState(false);
 
+  //read
   const fetchTasks = () => {
     setIsLoading(true);
-
-    // const test = query(ref(db),orderByChild("timeStamp"))
-    // onValue(test, (snapshot) => {
-    //   const data = snapshot.val();
-    //   // console.log(data);
-
-    //   const loadedTasks = [];
-    //   for (const taskKey in data) {
-    //     // console.log(taskKey);
-
-    //     loadedTasks.push({
-    //       id: data[taskKey].uuid,
-    //       text: data[taskKey].todo,
-    //       done: data[taskKey].taskStatus,
-    //       time: data[taskKey].timeStamp
-    //     });
-    //   }
-    //   console.log(loadedTasks);
-
-    //   setTasks(loadedTasks);
-    //   setIsLoading(false);
-    //  });
 
     const test = query(ref(db), orderByChild("timeStamp"));
     onValue(test, (snapshot) => {
@@ -72,12 +49,6 @@ function App() {
   }, []);
 
   const saveTextFunc = (TextData) => {
-    // console.log(TextData.todo);
-
-    // set(ref(db, `/${TextData.uuid}`), {
-    //   ...TextData
-    // });
-
     const test = query(ref(db, `/${TextData.uuid}`));
     set(test, {
       ...TextData,
@@ -87,9 +58,6 @@ function App() {
   ///Delelte
   const deleteTextFunc = (taskText) => {
     remove(ref(db, `/${taskText.id}`));
-    // db().ref(`/${taskText.id}`).remove();
-    // fetchTasks();
-    // console.log(taskText);
   };
 
   ///update
@@ -104,16 +72,17 @@ function App() {
   };
 
   return (
-    <>
-      <NewTask onSaveText={saveTextFunc}></NewTask>
-
-      <ShowTask
-        items={tasks}
-        isLoadingProp={isLoading}
-        onDeleteText={deleteTextFunc}
-        onDone={updateFunc}
-      ></ShowTask>
-    </>
+    <Container className="glassEffect mt-5 mb-3">
+      <Row>
+        <NewTask onSaveText={saveTextFunc}></NewTask>
+        <ShowTask
+          items={tasks}
+          isLoadingProp={isLoading}
+          onDeleteText={deleteTextFunc}
+          onDone={updateFunc}
+        ></ShowTask>
+      </Row>
+    </Container>
   );
 }
 

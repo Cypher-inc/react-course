@@ -1,7 +1,5 @@
 import { Container, Row, Button } from "react-bootstrap";
-import { useState } from "react";
-import { db } from "../firebase";
-import { onValue, ref, remove, set, update } from "firebase/database";
+import "./ShowTasks.css";
 
 const ShowTask = (props) => {
   let emptyVar;
@@ -9,9 +7,8 @@ const ShowTask = (props) => {
   ///update
   const addClassFunc = (newData0) => {
     // console.log(newData0.text);
-    props.onDone(newData0)
+    props.onDone(newData0);
   };
-
 
   /////delete
   const deleteTextFunc = (newData1) => {
@@ -33,31 +30,37 @@ const ShowTask = (props) => {
     );
   } else if (props.items.length > 0) {
     emptyVar = props.items.map((newData) => (
-      <ul className="d-flex justify-content-between">
-        <Button
-          variant="success"
-          className="btn1 suc"
-          onClick={() => addClassFunc(newData)}
+      <div className="text-center borderRadius">
+        <ul
+          className={`${
+            newData.done ? "rowFade" : ""
+          } d-flex justify-content-between `}
         >
-          ✔
-        </Button>
-        <p className={`text-p ${newData.done ? "rowFade" : ""}`}>{newData.text}</p>
-        <Button
-          variant="danger"
-          className="btn1 del"
-          onClick={() => deleteTextFunc(newData)}
-        >
-          ❌
-        </Button>
-      </ul>
+          <Button
+            variant="success"
+            className="btn1 suc"
+            onClick={() => addClassFunc(newData)}
+          >
+            ✔
+          </Button>
+          <p className={`text-p ${newData.done ? "pFade" : ""}`}>
+            {newData.text}
+          </p>
+          <Button
+            variant="danger"
+            className="btn1 del"
+            onClick={() => deleteTextFunc(newData)}
+          >
+            ❌
+          </Button>
+        </ul>
+      </div>
     ));
   }
 
   return (
-    <Container className="inputCon bg-primary mt-2 mb-5 ">
-      <Row className="text-center">
-        <div className={`task-list`}>{emptyVar}</div>
-      </Row>
+    <Container className="displayCon mt-1 mb-5 ">
+      <Row>{emptyVar}</Row>
     </Container>
   );
 };

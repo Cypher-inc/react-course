@@ -6,8 +6,8 @@ import {
   Col,
   InputGroup,
   FormControl,
+  Form
 } from "react-bootstrap";
-import { db } from "../firebase";
 import { uid } from "uid";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
@@ -30,6 +30,7 @@ const NewTask = (props) => {
       todo: inputText,
       uuid,
       taskStatus: false,
+      timeStamp: new Date().getTime(),
     };
     props.onSaveText(textData);
     // set(ref(db, `/${uuid}`), {
@@ -37,7 +38,7 @@ const NewTask = (props) => {
     // });
 
     // console.log(textData.id);
-    console.log(inputText);
+    // console.log(inputText);
 
     setInputText("");
   };
@@ -46,7 +47,7 @@ const NewTask = (props) => {
     <form onSubmit={submitFunc}>
       <Container className="inputCon bg-primary mt-5 mb-4">
         <Row className="pt-1 pb-1 align-items-center">
-          <Col className="col-10">
+          {/* <Col className="col-10">
             <div>
               <InputGroup className="mt-3 mb-3 input-txt">
                 <FormControl
@@ -64,7 +65,18 @@ const NewTask = (props) => {
                 Enter Task
               </Button>{" "}
             </div>
-          </Col>
+          </Col> */}
+
+          <InputGroup className="mt-3 mb-3 input-txt">
+        <Form.Control
+        onChange={changeFunc}
+        value={inputText}
+          placeholder="Recipient's username"
+          aria-label="Recipient's username"
+          aria-describedby="basic-addon2"
+        />
+        <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
+      </InputGroup>
         </Row>
       </Container>
     </form>
