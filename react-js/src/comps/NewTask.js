@@ -10,7 +10,7 @@ import {
 import { uid } from "uid";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../comps/NewTasks.css";
-import CenteredModal from './CenteredModal.js'
+import CustomModal from "./CenteredModal.js";
 
 const NewTask = (props) => {
   const [inputText, setInputText] = useState("");
@@ -45,11 +45,6 @@ const NewTask = (props) => {
   return (
     <Container className="inputCon mt-4 mb-4">
       <Row>
-        {/* <Button variant="primary" onClick={() => setModalShow(true)}>
-          Launch vertically centered modal
-        </Button> */}
-
-        <CenteredModal show={modalShow} onHide={() => setModalShow(false)} />
         <h1 className="text-center mt-4">To-Do List</h1>
         <form onSubmit={submitFunc}>
           <InputGroup className="mt-3 mb-3 input-txt">
@@ -66,6 +61,7 @@ const NewTask = (props) => {
             </Button>{" "}
           </InputGroup>
         </form>
+        <CustomModal show={modalShow} onHide={() => setModalShow(false)} />
       </Row>
     </Container>
   );
