@@ -6,6 +6,11 @@
   color: transparent;
 }
 
+.inputBoxBtn{
+  background: #0028ee;
+  color: whitesmoke;
+}
+
 .inputBox {
   font-weight: 500;
 }

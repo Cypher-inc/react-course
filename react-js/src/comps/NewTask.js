@@ -44,7 +44,7 @@ const NewTask = (props) => {
               aria-label="Enter tasks"
               aria-describedby="basic-addon2"
             />
-            <Button variant="warning" type="submit" className="inputBoxBtn">
+            <Button variant="primary" type="submit" className="inputBoxBtn">
               Enter Task
             </Button>{" "}
           </InputGroup>
