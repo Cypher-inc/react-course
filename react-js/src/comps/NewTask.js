@@ -1,8 +1,16 @@
 import { useState } from "react";
-import { Container, Row, Button, InputGroup, Form } from "react-bootstrap";
+import {
+  Modal,
+  Container,
+  Row,
+  Button,
+  InputGroup,
+  Form,
+} from "react-bootstrap";
 import { uid } from "uid";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../comps/NewTasks.css";
+import CenteredModal from './CenteredModal.js'
 
 const NewTask = (props) => {
   const [inputText, setInputText] = useState("");
@@ -12,10 +20,13 @@ const NewTask = (props) => {
     setInputText(event.target.value);
   };
 
+  const [modalShow, setModalShow] = useState(false);
+
   const submitFunc = (event) => {
     event.preventDefault();
     if (inputText.length === 0) {
-      alert("Input Text empty!");
+      // alert("Input Text empty!");
+      setModalShow(true)
       return;
     }
     const uuid = uid();
@@ -30,9 +41,15 @@ const NewTask = (props) => {
     setInputText("");
   };
 
+
   return (
     <Container className="inputCon mt-4 mb-4">
       <Row>
+        {/* <Button variant="primary" onClick={() => setModalShow(true)}>
+          Launch vertically centered modal
+        </Button> */}
+
+        <CenteredModal show={modalShow} onHide={() => setModalShow(false)} />
         <h1 className="text-center mt-4">To-Do List</h1>
         <form onSubmit={submitFunc}>
           <InputGroup className="mt-3 mb-3 input-txt">
