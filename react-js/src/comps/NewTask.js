@@ -33,6 +33,7 @@ const NewTask = (props) => {
       todo: inputText,
       uuid,
       taskStatus: false,
+      taskRemove: false,
       timeStamp: new Date().getTime(),
     };
     props.onSaveText(textData);

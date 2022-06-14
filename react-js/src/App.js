@@ -26,16 +26,17 @@ function App() {
   const fetchTasks = () => {
     setIsLoading(true);
 
-    const test = query(ref(db), orderByChild("timeStamp"));
-    onValue(test, (snapshot) => {
+    const que1 = query(ref(db), orderByChild("timeStamp"));
+    onValue(que1, (snapshot) => {
       const loadedTasks = [];
       snapshot.forEach((child) => {
         const data = child.val();
-        console.log(data);
+        // console.log(data);
         loadedTasks.push({
           id: data.uuid,
           text: data.todo,
           done: data.taskStatus,
+          del: data.taskRemove,
           time: data.timeStamp,
         });
       });
@@ -57,7 +58,15 @@ function App() {
 
   ///Delelte
   const deleteTextFunc = (taskText) => {
-    remove(ref(db, `/${taskText.id}`));
+    update(ref(db, `/${taskText.id}`), {
+      todo: taskText.text,
+      uuid: taskText.id,
+      taskRemove: !taskText.del,
+    });
+    setTimeout(() => {
+      remove(ref(db, `/${taskText.id}`));
+    }, 500);
+    // remove(ref(db, `/${taskText.id}`));
   };
 
   ///update

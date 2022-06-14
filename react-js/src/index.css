@@ -17,6 +17,7 @@ body {
     #292e49,
     #536976
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .glassEffect {
@@ -26,6 +27,9 @@ body {
   margin-top: 4%;
   background: rgba(0, 0, 0, 0.1);
   box-shadow: rgba(183, 178, 178, 0.1) 0px 7px 29px 0px;
+  animation: zoomIn;
+  animation-duration: 0.5s;
+  transition: all 1s ease;
 }
 
 /* ul p {

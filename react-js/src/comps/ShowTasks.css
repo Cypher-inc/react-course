@@ -50,12 +50,16 @@ ul {
   text-decoration: line-through;
   opacity: 0.3;
 }
-
+.fadeOut {
+  animation: fadeOut; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 0.5s;
+}
 .displayCon {
   width: 60% !important;
   margin-left: 20% !important;
   margin-right: 20% !important;
   border-radius: 10px !important;
+  transition: all 1s ease;
 }
 
 .text-p {
@@ -64,6 +68,7 @@ ul {
 }
 
 ul.bg-light,
+ul.bg-secondary,
 .loadingP {
   border-radius: 50px;
   color: black;

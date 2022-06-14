@@ -1,5 +1,6 @@
 import { Container, Row, Button } from "react-bootstrap";
 import "./ShowTasks.css";
+import "../../node_modules/animate.css/animate.css";
 
 const ShowTask = (props) => {
   let emptyVar;
@@ -24,13 +25,18 @@ const ShowTask = (props) => {
     );
   } else if (props.items.length === 0) {
     emptyVar = (
-      <ul className="bg-secondary">
-        <p>{"No Data Found"}</p>
+      <ul className="bg-secondary text-center">
+        <p className="loadingP">{"No Task Found"}</p>
       </ul>
     );
   } else if (props.items.length > 0) {
     emptyVar = props.items.map((newData) => (
-      <div className="text-center taskItem">
+      <div
+        key={newData.id}
+        className={`text-center taskItem animate__animated ${
+          newData.del ? "fadeOut" : "animate__fadeIn "
+        }`}
+      >
         <ul
           className={`${
             newData.done ? "rowFade" : ""

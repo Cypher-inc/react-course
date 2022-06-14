@@ -25,23 +25,23 @@
   margin-left: 10% !important;
   margin-right: 10% !important;
   border-radius: 10px !important;
+  transition: all 1s ease;
+
 }
 
-
-h1{
-    font-size: 4vw;
-    font-weight: 400;
+h1 {
+  font-size: 4vw;
+  font-weight: 400;
 }
-
 
 /* ///////////media queries////////// */
-@media (max-width: 575.98px) {  
-    .inputCon {
-        width: 90% !important;
-        margin-left: 5% !important;
-        margin-right: 5% !important;
-      }
-      .inputBoxBtn{
-        font-size: 0.8em;
-      }
+@media (max-width: 575.98px) {
+  .inputCon {
+    width: 90% !important;
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+  }
+  .inputBoxBtn {
+    font-size: 0.8em;
+  }
 }
