@@ -1,9 +1,14 @@
-
-.modal-content{
-    background-color: #292e49;
-    /* color: black !important; */
+.modal-content {
+  background-color: #292e49;
+  /* color: black !important; */
 }
 
-.btn-close{
-    color: aliceblue !important;
+.modal-header .btn-close {
+  background-color: aliceblue !important;
+}
+
+.modal-header, .modal-footer{
+    border-bottom: 0px !important;
+    border-top: 0px !important;
+
 }

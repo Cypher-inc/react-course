@@ -56,8 +56,9 @@ const NewTask = (props) => {
               aria-describedby="basic-addon2"
             />
             <Button variant="primary" type="submit" className="inputBoxBtn">
-              Enter Task
+              Add Task
             </Button>{" "}
+            
           </InputGroup>
         </form>
         <CustomModal show={modalShow} onHide={() => setModalShow(false)} />

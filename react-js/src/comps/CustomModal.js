@@ -7,11 +7,11 @@ function CustomModal(props) {
     <>
       <Modal show={props.show} onHide={props.onHide} className='customModal'>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>ERROR</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>Input field cannot be empty!</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={props.onHide}>
+          <Button variant="primary" onClick={props.onHide}>
             Close
           </Button>
         </Modal.Footer>

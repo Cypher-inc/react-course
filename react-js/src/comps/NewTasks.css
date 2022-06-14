@@ -6,10 +6,10 @@
   color: transparent;
 }
 
-.inputBoxBtn{
+/* .inputBoxBtn{
   background: #0028ee;
   color: whitesmoke;
-}
+} */
 
 .inputBox {
   font-weight: 500;
@@ -40,5 +40,8 @@ h1{
         width: 90% !important;
         margin-left: 5% !important;
         margin-right: 5% !important;
+      }
+      .inputBoxBtn{
+        font-size: 0.8em;
       }
 }
