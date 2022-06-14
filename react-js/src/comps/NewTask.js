@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Modal,
   Container,
   Row,
   Button,
@@ -10,7 +9,7 @@ import {
 import { uid } from "uid";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../comps/NewTasks.css";
-import CustomModal from "./CenteredModal.js";
+import CustomModal from "./CustomModal.js";
 
 const NewTask = (props) => {
   const [inputText, setInputText] = useState("");
