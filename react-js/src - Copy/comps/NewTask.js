@@ -3,13 +3,13 @@ import {
   Container,
   Row,
   Button,
-  Col,
   InputGroup,
-  FormControl,
-  Form
+  Form,
 } from "react-bootstrap";
 import { uid } from "uid";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../comps/NewTasks.css";
+import CustomModal from "./CustomModal.js";
 
 const NewTask = (props) => {
   const [inputText, setInputText] = useState("");
@@ -19,10 +19,13 @@ const NewTask = (props) => {
     setInputText(event.target.value);
   };
 
+  const [modalShow, setModalShow] = useState(false);
+
   const submitFunc = (event) => {
     event.preventDefault();
     if (inputText.length === 0) {
-      alert("Input Text empty!");
+      // alert("Input Text empty!");
+      setModalShow(true)
       return;
     }
     const uuid = uid();
@@ -30,56 +33,38 @@ const NewTask = (props) => {
       todo: inputText,
       uuid,
       taskStatus: false,
+      taskRemove: false,
       timeStamp: new Date().getTime(),
     };
     props.onSaveText(textData);
-    // set(ref(db, `/${uuid}`), {
-    //   ...textData
-    // });
-
-    // console.log(textData.id);
-    // console.log(inputText);
 
     setInputText("");
   };
 
-  return (
-    <form onSubmit={submitFunc}>
-      <Container className="inputCon bg-primary mt-5 mb-4">
-        <Row className="pt-1 pb-1 align-items-center">
-          {/* <Col className="col-10">
-            <div>
-              <InputGroup className="mt-3 mb-3 input-txt">
-                <FormControl
-                  onChange={changeFunc}
-                  value={inputText}
-                  className="input-box"
-                  aria-label="Text input with checkbox"
-                />
-              </InputGroup>
-            </div>
-          </Col>
-          <Col className="col-but col-2">
-            <div>
-              <Button variant="warning" type="submit">
-                Enter Task
-              </Button>{" "}
-            </div>
-          </Col> */}
 
+  return (
+    <Container className="inputCon mt-4 mb-4">
+      <Row>
+        <h1 className="text-center mt-4">To-Do List</h1>
+        <form onSubmit={submitFunc}>
           <InputGroup className="mt-3 mb-3 input-txt">
-        <Form.Control
-        onChange={changeFunc}
-        value={inputText}
-          placeholder="Recipient's username"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-        />
-        <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
-      </InputGroup>
-        </Row>
-      </Container>
-    </form>
+            <Form.Control
+              className="inputBox"
+              onChange={changeFunc}
+              value={inputText}
+              placeholder="Enter task.."
+              aria-label="Enter tasks"
+              aria-describedby="basic-addon2"
+            />
+            <Button variant="primary" type="submit" className="inputBoxBtn">
+              Add Task
+            </Button>{" "}
+            
+          </InputGroup>
+        </form>
+        <CustomModal show={modalShow} onHide={() => setModalShow(false)} />
+      </Row>
+    </Container>
   );
 };
 export default NewTask;
