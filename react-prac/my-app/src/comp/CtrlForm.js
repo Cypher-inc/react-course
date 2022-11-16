@@ -3,12 +3,13 @@ import { Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const CtrlForm = () => {
+const CtrlForm = (props) => {
   const [userName, setUserName] = useState("");
-  
+
   const formSubFun = (e) => {
     e.preventDefault();
     console.log(userName);
+    props.displayCompProp(userName)
     setUserName("");
   };
 
