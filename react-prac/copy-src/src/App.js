@@ -6,18 +6,35 @@ import CtrlForm from "./comp/CtrlForm";
 import { useState } from "react";
 import DisplayItems from "./comp/DIsplayItems";
 import NavbarComp from "./comp/NavbarComp";
+import UnCtrlForm from "./comp/UnCtrlForm";
 
 function App() {
   const [userData, setUserData] = useState("");
 
   const displayComp = (data) => {
-    console.log(data);
-    let dataList = [data];
-    setUserData((prevData) => [...prevData, dataList]);
+    let x = Math.floor(Math.random() * 10000000 + 1);
 
-    console.log(userData);
+    let ctrData = {
+      uid: x,
+      Name: data,
+    };
+
+    setUserData((prevData) => [...prevData, ctrData]);
+
+    // console.log(userData);
   };
 
+  const ucFormFun = (ucNameVal) => {
+    let x = Math.floor(Math.random() * 10000000 + 1);
+
+    // console.log(x);
+    let ucData = {
+      uid: x,
+      Name: ucNameVal,
+    };
+
+    setUserData((prevData) => [...prevData, ucData]);
+  };
   return (
     <div className="App">
       <NavbarComp></NavbarComp>
@@ -27,6 +44,7 @@ function App() {
           <hr></hr>
           <Dec></Dec>
           <CtrlForm displayCompProp={displayComp}></CtrlForm>
+          <UnCtrlForm ucFormProp={ucFormFun}></UnCtrlForm>
           <DisplayItems displayProp={userData}></DisplayItems>
         </Row>
       </Container>

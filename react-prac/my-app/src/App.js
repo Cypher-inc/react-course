@@ -7,6 +7,7 @@ import { useState } from "react";
 import DisplayItems from "./comp/DIsplayItems";
 import NavbarComp from "./comp/NavbarComp";
 import UnCtrlForm from "./comp/UnCtrlForm";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [userData, setUserData] = useState("");
@@ -40,12 +41,36 @@ function App() {
       <NavbarComp></NavbarComp>
       <Container className="appC mt-5">
         <Row>
-          <Inc></Inc>
-          <hr></hr>
-          <Dec></Dec>
-          <CtrlForm displayCompProp={displayComp}></CtrlForm>
-          <UnCtrlForm ucFormProp={ucFormFun}></UnCtrlForm>
-          <DisplayItems displayProp={userData}></DisplayItems>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Inc></Inc>
+                  <hr></hr>
+                  <Dec></Dec>
+                </>
+              }
+            ></Route>
+            <Route
+              path="/controlled-form"
+              element={
+                <>
+                  <CtrlForm displayCompProp={displayComp}></CtrlForm>
+                  <DisplayItems displayProp={userData}></DisplayItems>
+                </>
+              }
+            ></Route>
+            <Route
+              path="/uncontrolled-form"
+              element={
+                <>
+                  <UnCtrlForm ucFormProp={ucFormFun}></UnCtrlForm>
+                  <DisplayItems displayProp={userData}></DisplayItems>
+                </>
+              }
+            ></Route>
+          </Routes>
         </Row>
       </Container>
     </div>

@@ -22,9 +22,8 @@ const CtrlForm = (props) => {
   };
 
   return (
-    <Container className="c-form mb-4">
+    <Container className="c-form ">
       <Row>
-        <hr></hr>
         <h2 className="text-center">Controlled Form</h2>
         <Form onSubmit={formSubFun}>
           <Form.Group className="mb-3" controlId="formBasicEmail">

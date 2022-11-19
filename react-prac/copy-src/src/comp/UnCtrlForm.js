@@ -20,7 +20,7 @@ const UnCtrlForm = (props) => {
   };
 
   return (
-    <Container className="c-form">
+    <Container className="mt-1">
       <Row>
         <h2 className="text-center">Uncontrolled Form</h2>
         <Form onSubmit={formSubmitUc}>
