@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 
 const DisplayItems = (props) => {
-  // console.log(props.displayProp);
+  console.log(props.displayProp);
   let listDisplay = "";
 
   if (props.displayProp.length === 0) {

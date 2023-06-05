@@ -1,97 +1,114 @@
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import NewTask from "./comps/NewTask";
-import ShowTask from "./comps/ShowTask";
-import { useState, useEffect } from "react";
-import { db } from "./firebase";
-import {
-  onValue,
-  ref,
-  remove,
-  set,
-  update,
-  query,
-  orderByChild,
-} from "firebase/database";
-import { Container, Row} from "react-bootstrap";
+import React, { useState, useEffect, useCallback } from "react";
+
+import MoviesList from "./components/MoviesList";
+import AddMovie from "./components/AddMovie";
+import "./App.css";
 
 function App() {
-  const testData = [];
-
-  const [tasks, setTasks] = useState(testData);
-
-  ////////////////
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  //read
-  const fetchTasks = () => {
+  const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
+    setError(null);
+    try {
+      // const response = await fetch("https://swapi.dev/api/films/");
+      const response = await fetch(
+        "https://react-http1-59f2d-default-rtdb.firebaseio.com/movies.json"
+      );
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
 
-    const que1 = query(ref(db), orderByChild("timeStamp"));
-    onValue(que1, (snapshot) => {
-      const loadedTasks = [];
-      snapshot.forEach((child) => {
-        const data = child.val();
-        // console.log(data);
-        loadedTasks.push({
-          id: data.uuid,
-          text: data.todo,
-          done: data.taskStatus,
-          del: data.taskRemove,
-          time: data.timeStamp,
+      const data = await response.json();
+      // console.log(data);
+
+      const newMoviesArr = [];
+
+      // console.log(newMoviesArr);
+
+      for (const key in data) {
+        // console.log(key);
+        // newMoviesArr.slice(1);
+
+        newMoviesArr.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate,
         });
-      });
-      setTasks(loadedTasks);
-      setIsLoading(false);
-    });
-  };
+      }
+      console.log(newMoviesArr.splice(1, 4));
+      const newMoviesArr1 = newMoviesArr.splice(5);
 
-  useEffect(() => {
-    fetchTasks();
+      // const transformedMovies = data.results.map((movieData) => {
+      //   return {
+      //     id: movieData.episode_id,
+      //     title: movieData.title,
+      //     openingText: movieData.opening_crawl,
+      //     releaseDate: movieData.release_date,
+      //   };
+      // });
+      // test()
+      setMovies(newMoviesArr1);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
   }, []);
 
-  const saveTextFunc = (TextData) => {
-    const test = query(ref(db, `/${TextData.uuid}`));
-    set(test, {
-      ...TextData,
-    });
-  };
+  useEffect(() => {
+    fetchMoviesHandler();
+  }, [fetchMoviesHandler]);
 
-  ///Delelte
-  const deleteTextFunc = (taskText) => {
-    update(ref(db, `/${taskText.id}`), {
-      todo: taskText.text,
-      uuid: taskText.id,
-      taskRemove: !taskText.del,
-    });
-    setTimeout(() => {
-      remove(ref(db, `/${taskText.id}`));
-    }, 500);
-    // remove(ref(db, `/${taskText.id}`));
-  };
+  //fetch is also use to POST DATA
+  async function addMovieHandler(movie1) {
+    // console.log(movie);
+    const response = await fetch(
+      "https://react-http1-59f2d-default-rtdb.firebaseio.com/movies.json",
+      {
+        method: "POST",
+        body: JSON.stringify(movie1),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    fetchMoviesHandler()
+    const data = await response.json();
+    // console.log(data);
+  }
 
-  ///update
-  const updateFunc = (taskData) => {
-    console.log(taskData.id);
-    update(ref(db, `/${taskData.id}`), {
-      todo: taskData.text,
-      uuid: taskData.id,
-      taskStatus: !taskData.done,
-    });
-    console.log(taskData);
+  const content =
+    movies.length > 0 ? (
+      <MoviesList movies={movies} />
+    ) : error ? (
+      <p>{error}</p>
+    ) : isLoading ? (
+      <h1>⏳</h1>
+    ) : (
+      <h1>No movies found.</h1>
+    );
+
+  const test = () => {
+    console.log("testing..");
   };
 
   return (
-    <Container className="glassEffect mb-3">
-      <Row>
-        <NewTask onSaveText={saveTextFunc}></NewTask>
-        <ShowTask
-          items={tasks}
-          isLoadingProp={isLoading}
-          onDeleteText={deleteTextFunc}
-          onDone={updateFunc}
-        ></ShowTask>
-      </Row>
-    </Container>
+    <React.Fragment>
+      <section>
+        <AddMovie
+          onAddMovie={addMovieHandler}
+          onFetchProp={fetchMoviesHandler}
+          // onTestProp={test}
+        />
+      </section>
+      <section>
+        <button onClick={fetchMoviesHandler}>Fetch Movies</button>
+      </section>
+      <section>{content}</section>
+    </React.Fragment>
   );
 }
 

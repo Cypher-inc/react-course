@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 const UnCtrlForm = (props) => {
   const uncontrolledRef = useRef();
-
+  
   const formSubmitUc = (e) => {
     e.preventDefault();
 
@@ -14,6 +14,8 @@ const UnCtrlForm = (props) => {
     if (!ucNameVal) {
       alert("Input Field cannot be empty!");
     } else {
+      // console.log(ucNameVal);
+      
       props.ucFormProp(ucNameVal);
       uncontrolledRef.current.value = "";
     }
@@ -31,6 +33,7 @@ const UnCtrlForm = (props) => {
               type="text"
               placeholder="Enter LastName"
             />
+
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit

@@ -8,6 +8,8 @@ import DisplayItems from "./comp/DIsplayItems";
 import NavbarComp from "./comp/NavbarComp";
 import UnCtrlForm from "./comp/UnCtrlForm";
 import { Routes, Route } from "react-router-dom";
+import TestCounter from "./comp/TestCounter";
+import EffectCompTest from "./comp/EffectComp";
 
 function App() {
   const [userData, setUserData] = useState("");
@@ -46,6 +48,8 @@ function App() {
               path="/"
               element={
                 <>
+                  <EffectCompTest></EffectCompTest>
+                  <TestCounter></TestCounter>
                   <Inc></Inc>
                   <hr></hr>
                   <Dec></Dec>
